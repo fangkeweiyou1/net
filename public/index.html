@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <style type="text/css">
+        .applist li img {
+            width: 50px;
+            margin-right: 20px;
+        }
+
+        .applist li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+        }
+
+        .links a:nth-child(n+2) {
+            /*margin-top: 10px;*/
+        }
+    </style>
+    <title>武时亿安卓APP列表</title>
+</head>
+<body>
+
+<div class="asia5b_third"><a href="http://192.168.2.139:8000/newasia5b/asia5b_third.html" target="_self">新代购吊起第三方APP8</a></div>
+
+<ul class="applist">
+    <li>
+        <img id="logo_wms" src="images/ic_wms_launcher.png">
+
+        <div id="appname_wms" class="appname">武时亿WMS</div>
+
+        <div class="links">
+            <a href="#" id="wms_cn">测试</a>
+            <a href="#" id="wms_com">正式</a>
+        </div>
+    </li>
+    <li>
+        <img id="logo_shop" src="images/ic_asia_launcher.png">
+
+        <div id="appname_shop" class="appname">武时亿商城</div>
+
+        <div class="links">
+            <a href="#" id="shop_cn">测试</a>
+            <a href="#" id="shop_com">正式</a>
+        </div>
+    </li>
+    <li>
+        <img id="logo_jy" src="images/ic_asia_launcher.png">
+
+        <div id="appname_jy" class="appname">武时亿集运</div>
+
+        <div class="links">
+            <a href="#" id="jy_cn">测试</a>
+            <a href="#" id="jy_com">正式</a>
+        </div>
+    </li>
+    <li>
+        <img id="logo_newasia5b" src="images/ic_asia_launcher.png">
+
+        <div id="appname_newasia5b" class="appname">武时亿新代购</div>
+
+        <div class="links">
+            <a href="#" id="newasia5b_cn">测试</a>
+            <a href="#" id="newasia5b_com">正式</a>
+        </div>
+    </li>
+    <li>
+        <img id="logo_live" src="images/ic_asia_launcher.png">
+
+        <div id="appname_live" class="appname">武时亿直播</div>
+
+        <div class="links">
+            <a href="#" id="live_cn">测试</a>
+            <a href="#" id="live_com">正式</a>
+        </div>
+    </li>
+    <li>
+        <img id="logo_pay" src="images/ic_asia_launcher.png">
+
+        <div id="appname_pay" class="appname">武时亿支付</div>
+
+        <div class="links">
+            <a href="#" id="pay_cn">测试</a>
+            <a href="#" id="pay_com">正式</a>
+        </div>
+    </li>
+</ul>
+
+
+
+<script>
+    var download = 'download.html?appname=appname_text&download_url=download_url_text&logo=logo_text'
+
+    var wms_cn = document.getElementById('wms_cn')
+    var wms_com = document.getElementById('wms_com')
+    var appname_wms = document.getElementById('appname_wms')
+    var logo_wms = document.getElementById('logo_wms')
+    wms_cn.href = encodeURI(download.replace('appname_text', appname_wms.innerText + wms_cn.innerText)
+        .replace('download_url_text', 'wms.apk')
+        .replace('logo_text', logo_wms.src))
+    wms_com.href = wms_cn.href
+
+    var shop_cn = document.getElementById('shop_cn')
+    var shop_com = document.getElementById('shop_com')
+    var appname_shop = document.getElementById('appname_shop')
+    var logo_shop = document.getElementById('logo_shop')
+    shop_cn.href = encodeURI(download.replace('appname_text', appname_shop.innerText + shop_cn.innerText)
+        .replace('download_url_text', 'shop.apk')
+        .replace('logo_text', logo_shop.src))
+    shop_com.href = encodeURI(download.replace('appname_text', appname_shop.innerText + shop_com.innerText)
+        .replace('download_url_text', 'shop.apk')
+        .replace('logo_text', logo_shop.src))
+
+    var jy_cn = document.getElementById('jy_cn')
+    var jy_com = document.getElementById('jy_com')
+    var appname_jy = document.getElementById('appname_jy')
+    var logo_jy = document.getElementById('logo_jy')
+
+    var newasia5b_cn = document.getElementById('newasia5b_cn')
+    var newasia5b_com = document.getElementById('newasia5b_com')
+    var appname_newasia5b = document.getElementById('appname_newasia5b')
+    var logo_newasia5b = document.getElementById('logo_newasia5b')
+    newasia5b_cn.href = encodeURI(download.replace('appname_text', appname_newasia5b.innerText + newasia5b_cn.innerText)
+        .replace('download_url_text', 'NewAsia5b_cn_2_3_0_6.apk')
+        .replace('logo_text', logo_newasia5b.src))
+    newasia5b_com.href = encodeURI(download.replace('appname_text', appname_newasia5b.innerText + newasia5b_com.innerText)
+        .replace('download_url_text', 'NewAsia5b_com_2_2_7_1.apk')
+        .replace('logo_text', logo_newasia5b.src))
+
+    var live_cn = document.getElementById('live_cn')
+    var live_com = document.getElementById('live_com')
+    var appname_live = document.getElementById('appname_live')
+    var logo_live = document.getElementById('logo_live')
+
+
+
+
+</script>
+
+</body>
+
+</html>

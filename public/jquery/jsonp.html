@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>-->
+    <script src="jquery.js"></script>
+    <title>JSONP</title>
+</head>
+<body>
+<p>获取玩安卓信息</p>
+<script type="text/javascript">
+    $.getJSON("https://www.runoob.com/try/ajax/jsonp.php?jsoncallback=callbackFunction",function (data) {
+        alert(data)
+    })
+
+</script>
+</body>
+</html>

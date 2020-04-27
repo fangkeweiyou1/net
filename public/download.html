@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="javascripts/index.js"></script>
+    <style type="text/css">
+        a {
+            text-decoration: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*左右图片*/
+        .ic_fir_left, .ic_fir_right {
+            max-width: 20%;
+        }
+
+        .ic_fir_left {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .ic_fir_right {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        /*主内容*/
+        .app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+        #download_url{
+            text-decoration: none;
+            border-bottom: none;
+            display: inline-block;
+            width: 150px;
+            line-height: 40px;
+            text-align: center;
+            height: 40px;
+            color: white;
+            background-color: deepskyblue;
+            border-radius: 20px;
+        }
+        #download_url:hover {
+            text-decoration: none;
+            border-bottom: none;
+            color: deepskyblue;
+            background-color: powderblue;
+        }
+    </style>
+    <title>下载</title>
+</head>
+<body>
+
+<div class="app">
+    <img src="images/ic_wms_launcher.png" alt="" id="logo">
+    <h3 id="appname">AsiaMall</h3>
+    <a href="#" id="download_url">
+        下载安装
+    </a>
+</div>
+
+<img class="ic_fir_left" src="images/ic_fir_left.png" alt="">
+<img class="ic_fir_right" src="images/ic_fir_right.png" alt="">
+
+</body>
+<script>
+
+
+    var logo = document.getElementById('logo');
+    var appname = document.getElementById('appname');
+    var download_url = document.getElementById('download_url');
+    var requset = GetRequest();
+    var appname_text=requset.appname
+    console.log('appname_text'+appname_text);
+    //logo
+    logo.src=requset.logo;
+    //标题
+    appname.innerText=appname_text;
+    document.title=appname_text;
+    //下载地址
+    download_url.href=requset.download_url
+    console.log(requset);
+
+</script>
+</html>

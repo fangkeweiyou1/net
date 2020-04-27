@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <style type="text/css">
+        li {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        img {
+            margin-right: 20px;
+        }
+    </style>
+    <!--todo http://192.168.2.139:8000/newasia5b/asia5b_third.html-->
+    <title>吊起第三方APP</title>
+</head>
+<body>
+
+<ul>
+    <li>
+        <!--最新Api-->
+        <a id="whatsapp" href="#"><img src="images/whatsapp.png" alt="">2020Api跳转</a>
+
+    </li>
+    <li>
+        <!--2018的使用API-->
+        <a id="whatsapp_2018" href="#"><img src="images/whatsapp.png" alt="">2018Api跳转</a>
+
+    </li>
+    <li>
+        <a id="facebook" href="#"><img src="images/facebook.png" alt="">打开APP</a>
+    </li>
+    <li>
+        <a id="facebookWeb" href="#"><img src="images/facebook.png" alt="">打开Web</a>
+    </li>
+    <li>
+        <a id="messager" href="#"><img src="images/messager.png" alt=""></a>
+    </li>
+</ul>
+
+<script type="text/javascript">
+
+    var doBeanWhatsapp = {
+        do: "openWhatsapp",
+        url: "60109080255",
+        to: "2020",
+        log: "用2020Api吊起WhatsappAPP"
+    };
+    document.getElementById('whatsapp').onclick = function () {
+        window.Android.HtmlcallJava2(JSON.stringify(doBeanWhatsapp));
+        console.log(doBeanWhatsapp.log)
+    }
+    //    document.getElementById('whatsapp').addEventListener('click', function () {
+    //
+    //    });
+    var doBeanWhatsapp2018 = {
+        do: "openWhatsapp",
+        url: "https://api.whatsapp.com/send?phone=60109080255",
+        to: "2018",
+        log: "用2018Api吊起WhatsappAPP"
+    };
+    document.getElementById('whatsapp_2018').onclick = function () {
+        window.Android.HtmlcallJava2(JSON.stringify(doBeanWhatsapp2018));
+        console.log(doBeanWhatsapp2018.log)
+    }
+    var doBeanMessager = {
+        do: "openMessager",
+        url: "fb://messaging/1722485538043321",
+        log: "吊起MessagerAPP"
+    };
+    document.getElementById('messager').onclick = function () {
+        window.Android.HtmlcallJava2(JSON.stringify(doBeanMessager));
+        console.log(doBeanMessager.log)
+    }
+    var doBeanFacebook = {
+        do: "openFacebook",
+        url: "fb://profile/1722485538043321",
+        log: "吊起FacebookAPP"
+    };
+    document.getElementById('facebook').onclick = function () {
+        window.Android.HtmlcallJava2(JSON.stringify(doBeanFacebook));
+        console.log(doBeanFacebook.log)
+    }
+    var doBeanFacebookWeb = {
+        do: "openFacebook",
+        url: "https://www.facebook.com/profile.php?id=1722485538043321",
+        log: "打开Facebook网页"
+    };
+    document.getElementById('facebookWeb').onclick = function () {
+        window.Android.HtmlcallJava2(JSON.stringify(doBeanFacebookWeb));
+        console.log(doBeanFacebookWeb.log)
+    }
+</script>
+
+</body>
+</html>

@@ -32,7 +32,9 @@ app.get('/aaa', function (req, res) {
 
 //设置跨域访问
 app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://www.runoob.com");
+    // res.header("Access-Control-Allow-Origin", "https://www.runoob.com");
+    // res.header("Access-Control-Allow-Origin", "https://fcm.googleapis.com");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type,Access-Token");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By",' 3.2.1');
@@ -43,7 +45,7 @@ app.all('*', function(req, res, next) {
     }))
 });
 
-app.listen(8080)
+app.listen(8000)
 
 console.log('服务器启动成功')
 

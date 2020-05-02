@@ -8,6 +8,6 @@ function GetRequest() {
             theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }
     }
-    console.log('传递路径:'+theRequest)
+    console.log('传递路径:'+theRequest.toString())
     return theRequest;
 }

@@ -39,8 +39,8 @@
     <title>武时亿安卓APP列表</title>
 </head>
 <body>
-
-<div class="asia5b_third"><a href="http://192.168.2.139:8000/newasia5b/asia5b_third.html" target="_self">新代购吊起第三方APP8</a></div>
+<a href="firebase/firebase.html">firebase</a>
+<div class="asia5b_third"><a href="http://192.168.1.7:8000/newasia5b/asia5b_third.html" target="_self">新代购吊起第三方APP8</a></div>
 
 <ul class="applist">
     <li>
@@ -105,50 +105,52 @@
     </li>
 </ul>
 
+<a href="files/other/tuanyuan.apk">下载团员.apk</a>
+
 
 
 <script>
-    var download = 'download.html?appname=appname_text&download_url=download_url_text&logo=logo_text'
+    var download = 'download.html?appname=appname_text&download_url=download_url_text&logo=logo_text';
 
-    var wms_cn = document.getElementById('wms_cn')
-    var wms_com = document.getElementById('wms_com')
-    var appname_wms = document.getElementById('appname_wms')
-    var logo_wms = document.getElementById('logo_wms')
+    var wms_cn = document.getElementById('wms_cn');
+    var wms_com = document.getElementById('wms_com');
+    var appname_wms = document.getElementById('appname_wms');
+    var logo_wms = document.getElementById('logo_wms');
     wms_cn.href = encodeURI(download.replace('appname_text', appname_wms.innerText + wms_cn.innerText)
         .replace('download_url_text', 'wms.apk')
-        .replace('logo_text', logo_wms.src))
-    wms_com.href = wms_cn.href
+        .replace('logo_text', logo_wms.src));
+    wms_com.href = wms_cn.href;
 
-    var shop_cn = document.getElementById('shop_cn')
-    var shop_com = document.getElementById('shop_com')
-    var appname_shop = document.getElementById('appname_shop')
-    var logo_shop = document.getElementById('logo_shop')
+    var shop_cn = document.getElementById('shop_cn');
+    var shop_com = document.getElementById('shop_com');
+    var appname_shop = document.getElementById('appname_shop');
+    var logo_shop = document.getElementById('logo_shop');
     shop_cn.href = encodeURI(download.replace('appname_text', appname_shop.innerText + shop_cn.innerText)
         .replace('download_url_text', 'shop.apk')
-        .replace('logo_text', logo_shop.src))
+        .replace('logo_text', logo_shop.src));
     shop_com.href = encodeURI(download.replace('appname_text', appname_shop.innerText + shop_com.innerText)
         .replace('download_url_text', 'shop.apk')
-        .replace('logo_text', logo_shop.src))
+        .replace('logo_text', logo_shop.src));
 
-    var jy_cn = document.getElementById('jy_cn')
-    var jy_com = document.getElementById('jy_com')
-    var appname_jy = document.getElementById('appname_jy')
-    var logo_jy = document.getElementById('logo_jy')
+    var jy_cn = document.getElementById('jy_cn');
+    var jy_com = document.getElementById('jy_com');
+    var appname_jy = document.getElementById('appname_jy');
+    var logo_jy = document.getElementById('logo_jy');
 
-    var newasia5b_cn = document.getElementById('newasia5b_cn')
-    var newasia5b_com = document.getElementById('newasia5b_com')
-    var appname_newasia5b = document.getElementById('appname_newasia5b')
-    var logo_newasia5b = document.getElementById('logo_newasia5b')
+    var newasia5b_cn = document.getElementById('newasia5b_cn');
+    var newasia5b_com = document.getElementById('newasia5b_com');
+    var appname_newasia5b = document.getElementById('appname_newasia5b');
+    var logo_newasia5b = document.getElementById('logo_newasia5b');
     newasia5b_cn.href = encodeURI(download.replace('appname_text', appname_newasia5b.innerText + newasia5b_cn.innerText)
-        .replace('download_url_text', 'NewAsia5b_cn_2_3_0_6.apk')
-        .replace('logo_text', logo_newasia5b.src))
+        .replace('download_url_text', 'NewAsia5b_cn_2_3_0_9.apk')
+        .replace('logo_text', logo_newasia5b.src));
     newasia5b_com.href = encodeURI(download.replace('appname_text', appname_newasia5b.innerText + newasia5b_com.innerText)
         .replace('download_url_text', 'NewAsia5b_com_2_2_7_1.apk')
-        .replace('logo_text', logo_newasia5b.src))
+        .replace('logo_text', logo_newasia5b.src));
 
-    var live_cn = document.getElementById('live_cn')
-    var live_com = document.getElementById('live_com')
-    var appname_live = document.getElementById('appname_live')
+    var live_cn = document.getElementById('live_cn');
+    var live_com = document.getElementById('live_com');
+    var appname_live = document.getElementById('appname_live');
     var logo_live = document.getElementById('logo_live')
 
 

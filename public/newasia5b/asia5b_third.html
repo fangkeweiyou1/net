@@ -45,7 +45,10 @@
         <a id="facebookWeb" href="#"><img src="images/facebook.png" alt="">打开Web</a>
     </li>
     <li>
-        <a id="messager" href="#"><img src="images/messager.png" alt=""></a>
+        <a id="messager" href="#"><img src="images/messager.png" alt="">打开Messager</a>
+    </li>
+    <li>
+        <a id="messager_2018" href="#"><img src="images/messager.png" alt="">打开Messager2018</a>
     </li>
 </ul>
 
@@ -53,12 +56,13 @@
 
     var doBeanWhatsapp = {
         do: "openWhatsapp",
-        url: "60109080255",
+        android_url: "smsto:60109080255",
+        ios_url: "wa.me/60109080255",
         to: "2020",
         log: "用2020Api吊起WhatsappAPP"
     };
     document.getElementById('whatsapp').onclick = function () {
-        window.Android.HtmlcallJava2(JSON.stringify(doBeanWhatsapp));
+        callback(doBeanWhatsapp)
         console.log(doBeanWhatsapp.log)
     }
     //    document.getElementById('whatsapp').addEventListener('click', function () {
@@ -68,39 +72,72 @@
         do: "openWhatsapp",
         url: "https://api.whatsapp.com/send?phone=60109080255",
         to: "2018",
-        log: "用2018Api吊起WhatsappAPP"
+        log: "用2018Api调起WhatsappAPP"
     };
     document.getElementById('whatsapp_2018').onclick = function () {
-        window.Android.HtmlcallJava2(JSON.stringify(doBeanWhatsapp2018));
+        callback(doBeanWhatsapp2018)
         console.log(doBeanWhatsapp2018.log)
-    }
+    };
     var doBeanMessager = {
         do: "openMessager",
-        url: "fb://messaging/1722485538043321",
-        log: "吊起MessagerAPP"
+        android_url: "fb://messaging/1722485538043321",
+        ios_url: "fb-messenger://user-thread/1722485538043321",
+        secondUrl: "https://www.messenger.com/t/1722485538043321",
+        log: "调起MessagerAPP"
     };
     document.getElementById('messager').onclick = function () {
-        window.Android.HtmlcallJava2(JSON.stringify(doBeanMessager));
+        callback(doBeanMessager)
         console.log(doBeanMessager.log)
-    }
+    };
+    var doBeanMessager2018 = {
+        do: "openMessager",
+        android_url: "fb-messenger://user/1722485538043321",
+        ios_url: "fb-messenger://user-thread/1722485538043321",
+        secondUrl: "https://www.messenger.com/t/1722485538043321",
+        log: "用2018Api调起MessagerAPP"
+    };
+    document.getElementById('messager_2018').onclick = function () {
+        callback(doBeanMessager2018);
+        console.log(doBeanMessager2018.log);
+    };
     var doBeanFacebook = {
         do: "openFacebook",
         url: "fb://profile/1722485538043321",
+        secondUrl: "https://www.facebook.com/profile.php?id=1722485538043321",
         log: "吊起FacebookAPP"
     };
     document.getElementById('facebook').onclick = function () {
-        window.Android.HtmlcallJava2(JSON.stringify(doBeanFacebook));
+        callback(doBeanFacebook)
         console.log(doBeanFacebook.log)
-    }
+    };
     var doBeanFacebookWeb = {
         do: "openFacebook",
         url: "https://www.facebook.com/profile.php?id=1722485538043321",
         log: "打开Facebook网页"
     };
     document.getElementById('facebookWeb').onclick = function () {
-        window.Android.HtmlcallJava2(JSON.stringify(doBeanFacebookWeb));
+        callback(doBeanFacebookWeb)
         console.log(doBeanFacebookWeb.log)
+    };
+
+    function callback(data) {
+        try {
+            window.Android.HtmlcallJava2(JSON.stringify(data));
+
+        } catch (err) {
+            console.log('Android数据通信')
+        }
+        try {
+            window.webkit.messageHandlers.Share.postMessage(data);
+        } catch (err) {
+            console.log('Ios数据通信')
+        }
     }
+
+    function androidCallBack(parmas) {
+        console.log('Android数据通信返回:' + parmas)
+    }
+
 </script>
 
 </body>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/normalize.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <style type="text/css">
+        body {
+            max-width: 540px;
+            min-width: 320px;
+            margin: 0 auto;
+            font-family: -apple-system, Helvetica, sans-serif;
+            background: white;
+            line-height: 1.5;
+            color: black;
+            overflow: hidden;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            outline: 0;
+            font-size: 12px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .line {
+            background-color: gray;
+            height: 1px;
+        }
+
+        .backRed {
+            background-color: #168CD5;
+        }
+
+        .backTrans {
+            background-color: transparent;
+        }
+
+        .fontColorWhite {
+            color: white;
+        }
+
+        .screenWidth {
+            width: 100%;
+        }
+
+        .gen {
+            /*background: pink;*/
+        }
+
+        .httptype_gen, .devicetype_gen {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 40px;
+        }
+
+        .httptype_cn, .httptype_com, .devicetype_android, .devicetype_ios {
+            flex: 1;
+            height: 40px;
+            line-height: 40px;
+            align-items: center;
+            text-align: center;
+        }
+
+        label {
+            display: flex;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        label input {
+            flex: 1;
+            line-height: 40px;
+            height: 40px;
+            font-size: 12px;
+        }
+
+        button {
+            width: 100%;
+            line-height: 40px;
+            height: 40px;
+        }
+
+    </style>
+    <title>代购版本更新管理</title>
+</head>
+<body>
+<div class="gen">
+    <div style="text-align: center" id="httptype_title">环境类型</div>
+    <div class="line"></div>
+    <div class="httptype_gen">
+        <div class="httptype_cn backRed fontColorWhite" onclick="httpClickListener('.cn')">.cn</div>
+        <div class="httptype_com" onclick="httpClickListener('.com')">.com</div>
+    </div>
+    <div class="line"></div>
+    <div style="text-align: center" id="devicetype_title">设备类型</div>
+    <div class="line"></div>
+    <div class="devicetype_gen">
+        <div class="devicetype_android backRed fontColorWhite" onclick="deviceClickListener('android')">android</div>
+        <div class="devicetype_ios" onclick="deviceClickListener('ios')">ios</div>
+    </div>
+    <div class="line"></div>
+    <label>
+        version<input id="version" type="text" placeholder="请输入版本号">
+    </label>
+    <div class="line"></div>
+    <label>
+        build<input id="build" type="text" placeholder="请输入build号">
+    </label>
+    <div class="line"></div>
+    <label>
+        change_log<input id="change_log" type="text" placeholder="请输入中文更新日志,例如解决不能微信登录BUG">
+    </label>
+    <div class="line"></div>
+    <label>
+        change_log_en<input id="change_log_en" type="text" placeholder="请输入英文更新日志,例如:Fix WeChat liogin BUG">
+    </label>
+    <div class="line"></div>
+    <label>
+        force_update(是否强制升级 0/1 否/是)<input id="force_update" type="checkbox">
+    </label>
+    <button onclick="submit()">设置</button>
+    <button onclick="tiaoshi()">获取当前版本信息</button>
+    <div class="resultcontent">
+        返回内容
+    </div>
+
+</div>
+
+<script>
+    //环境类型
+    var httpIsCN = true;
+    //设备类型
+    var deviceIsAndroid = true;
+    var baseUrl = '';
+    setHttpBaseUrl();
+    setDeviceTitle();
+    var httpClickListener = function (typeName) {
+        httpIsCN = typeName == '.cn';
+        setHttpBaseUrl();
+        document.querySelector('.httptype_cn').style.backgroundColor = httpIsCN ? '#168CD5' : 'transparent';
+        document.querySelector('.httptype_com').style.backgroundColor = (!httpIsCN) ? '#168CD5' : 'transparent';
+        document.querySelector('.httptype_cn').style.color = httpIsCN ? 'white' : 'black';
+        document.querySelector('.httptype_com').style.color = (!httpIsCN) ? 'white' : 'black';
+    };
+    var deviceClickListener = function (typeName) {
+        deviceIsAndroid = typeName == 'android';
+        setDeviceTitle();
+        document.querySelector('.devicetype_android').style.backgroundColor = deviceIsAndroid ? '#168CD5' : 'transparent';
+        document.querySelector('.devicetype_ios').style.backgroundColor = (!deviceIsAndroid) ? '#168CD5' : 'transparent';
+        document.querySelector('.devicetype_android').style.color = deviceIsAndroid ? 'white' : 'black';
+        document.querySelector('.devicetype_ios').style.color = (!deviceIsAndroid) ? 'white' : 'black';
+    };
+    var tiaoshi = function () {
+        $.post(baseUrl + 'api/mobile-v1/mobile.app.version.get', {
+            type: deviceIsAndroid ? 'android' : 'ios',
+            language_code: 'cn'
+        }, function (data) {
+            var text = JSON.stringify(data);
+            var result=JSON.parse(text);
+            var updateModel=result.data[0];
+            document.querySelector('#version').value=updateModel.version;
+            document.querySelector('#build').value=updateModel.build;
+            console.log(JSON.stringify(updateModel));
+            document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2)
+        });
+    };
+    var submit = function () {
+        var version = document.querySelector('#version').value;
+        var build = document.querySelector('#build').value;
+        var change_log = document.querySelector('#change_log').value;
+        var change_log_en = document.querySelector('#change_log_en').value;
+        var force_update = document.querySelector('#force_update').checked;
+        if (version == null || version == '') {
+            alert('version不能为空');
+            return
+        }
+        if (build == null || build == '') {
+            alert('build不能为空');
+            return
+        }
+        if (change_log == null || change_log == '') {
+            alert('change_log不能为空');
+            return
+        }
+        if (change_log_en == null || change_log_en == '') {
+            alert('change_log_en不能为空');
+            return
+        }
+        $.post(baseUrl + 'api/mobile-v1/mobile.app.version.set', {
+            type: deviceIsAndroid ? 'android' : 'ios',
+            version: version,
+            build: build,
+            change_log: change_log,
+            change_log_en: change_log_en,
+            force_update: force_update ? '1' : '0',
+        }, function (data) {
+            var text = JSON.stringify(data);
+            document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2);
+        })
+    };
+    //    tiaoshi();
+
+    function setHttpBaseUrl() {
+        baseUrl = httpIsCN ? 'https://api.gim-allnet.com/' : 'https://asia-allnet.com/';
+        document.querySelector('#httptype_title').innerText = '环境类型' + '(' + (httpIsCN ? '测试环境' : '正式环境') + ')';
+    };
+    function setDeviceTitle() {
+        document.querySelector('#devicetype_title').innerText = '设备类型' + '(' + (deviceIsAndroid ? 'android' : 'ios') + ')';
+    };
+</script>
+</body>
+</html>

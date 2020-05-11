@@ -164,12 +164,14 @@
             language_code: 'cn'
         }, function (data) {
             var text = JSON.stringify(data);
-            var result=JSON.parse(text);
-            var updateModel=result.data[0];
-            document.querySelector('#version').value=updateModel.version;
-            document.querySelector('#build').value=updateModel.build;
-            console.log(JSON.stringify(updateModel));
+            var result = JSON.parse(text);
             document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2)
+            if ((result.code == 200) || (result.code == 0)) {
+                var updateModel = result.data[0];
+                document.querySelector('#version').value = updateModel.version;
+                document.querySelector('#build').value = updateModel.build;
+                console.log(JSON.stringify(updateModel));
+            }
         });
     };
     var submit = function () {
@@ -206,12 +208,14 @@
             document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2);
         })
     };
+
     //    tiaoshi();
 
     function setHttpBaseUrl() {
         baseUrl = httpIsCN ? 'https://api.gim-allnet.com/' : 'https://asia-allnet.com/';
         document.querySelector('#httptype_title').innerText = '环境类型' + '(' + (httpIsCN ? '测试环境' : '正式环境') + ')';
     };
+
     function setDeviceTitle() {
         document.querySelector('#devicetype_title').innerText = '设备类型' + '(' + (deviceIsAndroid ? 'android' : 'ios') + ')';
     };

@@ -48,24 +48,7 @@
             align-items: center;
             padding-top: 50px;
         }
-        #download_url{
-            text-decoration: none;
-            border-bottom: none;
-            display: inline-block;
-            width: 150px;
-            line-height: 40px;
-            text-align: center;
-            height: 40px;
-            color: white;
-            background-color: deepskyblue;
-            border-radius: 20px;
-        }
-        #download_url:hover {
-            text-decoration: none;
-            border-bottom: none;
-            color: deepskyblue;
-            background-color: powderblue;
-        }
+
     </style>
     <title>下载</title>
 </head>
@@ -74,9 +57,6 @@
 <div class="app">
     <img src="images/ic_wms_launcher.png" alt="" id="logo">
     <h3 id="appname">AsiaMall</h3>
-    <a href="#" id="download_url">
-        下载安装
-    </a>
 </div>
 
 <img class="ic_fir_left" src="images/ic_fir_left.png" alt="">
@@ -86,20 +66,104 @@
 <script>
 
 
-    var logo = document.getElementById('logo');
-    var appname = document.getElementById('appname');
-    var download_url = document.getElementById('download_url');
-    var requset = GetRequest();
-    var appname_text=requset.appname
-    console.log('appname_text'+appname_text);
     //logo
-    logo.src=requset.logo;
+    var logo = document.getElementById('logo');
     //标题
-    appname.innerText=appname_text;
-    document.title=appname_text;
-    //下载地址
-    download_url.href=requset.download_url
+    var appname = document.getElementById('appname');
+
+    var requset = GetRequest();
+
+    var type = requset.type
+
+    switch (type) {
+        case 'wms': {
+            logo.src = 'images/ic_wms_launcher.png'
+            appname.innerText = '武时亿WMS';
+            document.title = '武时亿WMS';
+        }
+            break;
+        case 'newasia5b_cn': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿新代购';
+            document.title = '武时亿新代购';
+        }
+            break;
+        case 'newasia5b_com': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿新代购';
+            document.title = '武时亿新代购';
+        }
+            break;
+        case 'jy_cn': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿集运';
+            document.title = '武时亿集运';
+        }
+            break;
+        case 'jy_com': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿集运';
+            document.title = '武时亿集运';
+        }
+            break;
+        case 'shop_cn': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿商城';
+            document.title = '武时亿商城';
+        }
+            break;
+        case 'shop_com': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿商城';
+            document.title = '武时亿商城';
+        }
+            break;
+        case 'pay_cn': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿支付';
+            document.title = '武时亿支付';
+        }
+            break;
+        case 'pay_com': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿支付';
+            document.title = '武时亿支付';
+        }
+            break;
+        case 'live_cn': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿直播';
+            document.title = '武时亿直播';
+        }
+            break;
+        case 'live_com': {
+            logo.src = 'images/ic_asia_launcher.png'
+            appname.innerText = '武时亿直播';
+            document.title = '武时亿直播';
+        }
+            break;
+        case 'other':
+            logo.src = 'images/ic_files.png'
+            appname.innerText = '文件夹';
+            document.title = '文件夹';
+            break;
+        default:
+            break;
+    }
+
+
     console.log(requset);
+
+    $.get('/readDir?type=' + type, function (data, status) {
+        console.log(data)
+        var parent = $('.app').get(0);
+        data.forEach(function (file) {
+            var a = document.createElement('a');
+            a.innerText = file.filename;
+            a.href = file.filepath;
+            parent.appendChild(a)
+        });
+    })
 
 </script>
 </html>

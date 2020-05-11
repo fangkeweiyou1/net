@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试清除webview缓存</title>
+</head>
+<body>
+<script>
+    function testClearWebView() {
+        console.log('测试清除webview缓存');
+        try {
+            window.Android.HtmlcallJava2('第二次');
+        } catch (err) {
+            console.log('Android数据通信')
+        }
+    }
+</script>
+<button onclick="testClearWebView()">JS回调</button>
+</body>
+</html>

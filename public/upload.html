@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+        body {
+            background-color: #f8ba0b;
+        }
+        img{
+            width: 200px;
+        }
+        input::after{
+            content: "";
+            background-image: url("images/ic_upload.png");
+            background-size: 100px 100px;
+        }
+    </style>
+    <title>上传</title>
+</head>
+<body>
+<form action="http://192.168.1.7:8000/uploadFile" method="post" enctype="multipart/form-data">
+    <!--todo createFormData  (image)  中第一个参数文件名一定要与后台完全一致,否则报500 -->
+    <input type="file" name="image">
+    <input type="submit">
+
+</form>
+</body>
+</html>

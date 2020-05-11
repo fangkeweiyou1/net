@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <title>并发测试</title>
+</head>
+<body>
+<button id="bt_submit">并发测试</button>
+<script>
+    $(function () {
+        console.log('jqury已经准备好');
+        $('#bt_submit').get(0).onclick = function () {
+            for (var i = 0; i <= 10; i++) {
+                test();
+            }
+
+        }
+    });
+
+    function test() {
+        console.log('请求用户信息');
+        $.post('https://api.gim-allnet.com/api/mobile-v1/member.data', {
+            member_id: 5378
+        }, function (data, status) {
+            console.log(data)
+        });
+        console.log('请求购物车数量');
+        $.post('https://api.gim-allnet.com/api/mobile-v1/cart.get.products.qty', {
+            member_id: 5378,
+            language_code: 'cn',
+            session_id: 'Avz1WgWLFXTw3-GKm9EeP7GT3XTjFHBnJLvXcI2F7eD1',
+            source: '1',
+            type: 'daigou',
+            country_id: '4'
+        }, function (data, status) {
+            console.log(data)
+        });
+        console.log('请求订单数量');
+        $.post('https://api.gim-allnet.com/api/mobile-v1/orderdg.get.sidebar.count', {
+            member_id: 5378
+        }, function (data, status) {
+            console.log(data)
+        });
+        console.log('请求收藏数量');
+        $.post('https://api.gim-allnet.com/api/mobile-v1/member.wishlist.count', {
+            member_id: 5378
+        }, function (data, status) {
+            console.log(data)
+        });
+        console.log('请求用户余额');
+        $.post('https://api.gim-allnet.com/api/mobile-v1/member.balance.get', {
+            member_id: 5378
+        }, function (data, status) {
+            console.log(data)
+        });
+        console.log('获取各种最小值');
+        $.post('https://api.gim-allnet.com/api/mobile-v1/get.minimumValue', {
+            member_id: 5378
+        }, function (data, status) {
+            console.log(data)
+        });
+//        console.log('查看某个公众号历史数据');
+//        $.get('/other', function (data, status) {
+//            console.log(data)
+//        });
+    }
+</script>
+
+</body>
+</html>

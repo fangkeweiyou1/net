@@ -107,25 +107,6 @@
         <div class="devicetype_ios" onclick="deviceClickListener('ios')">ios</div>
     </div>
     <div class="line"></div>
-    <label>
-        version<input id="version" type="text" placeholder="请输入版本号">
-    </label>
-    <div class="line"></div>
-    <label>
-        build<input id="build" type="text" placeholder="请输入build号">
-    </label>
-    <div class="line"></div>
-    <label>
-        change_log<input id="change_log" type="text" placeholder="请输入中文更新日志,例如解决不能微信登录BUG">
-    </label>
-    <div class="line"></div>
-    <label>
-        change_log_en<input id="change_log_en" type="text" placeholder="请输入英文更新日志,例如:Fix WeChat liogin BUG">
-    </label>
-    <div class="line"></div>
-    <label>
-        force_update(是否强制升级 0/1 否/是)<input id="force_update" type="checkbox">
-    </label>
     <button onclick="submit()">设置</button>
     <button onclick="tiaoshi()">获取当前版本信息</button>
     <div class="resultcontent">
@@ -159,51 +140,16 @@
         document.querySelector('.devicetype_ios').style.color = (!deviceIsAndroid) ? 'white' : 'black';
     };
     var tiaoshi = function () {
-        $.post(baseUrl + 'api/mobile-v1/mobile.app.version.get', {
-            type: deviceIsAndroid ? 'android' : 'ios',
-            language_code: 'cn'
+        $.post(baseUrl + 'api/mobile-v1/mobile.h5.web.version.get', {
+            type: deviceIsAndroid ? 'android' : 'ios'
         }, function (data) {
             var text = JSON.stringify(data);
             var result = JSON.parse(text);
             document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2)
-            if ((result.result == 200) || (result.result == 1)) {
-                var updateModel = result.data[0];
-                document.querySelector('#version').value = updateModel.version;
-                document.querySelector('#build').value = updateModel.build;
-                console.log(JSON.stringify(updateModel));
-            }
         });
     };
     var submit = function () {
-        var version = document.querySelector('#version').value;
-        var build = document.querySelector('#build').value;
-        var change_log = document.querySelector('#change_log').value;
-        var change_log_en = document.querySelector('#change_log_en').value;
-        var force_update = document.querySelector('#force_update').checked;
-        if (version == null || version == '') {
-            alert('version不能为空');
-            return
-        }
-        if (build == null || build == '') {
-            alert('build不能为空');
-            return
-        }
-        if (change_log == null || change_log == '') {
-            alert('change_log不能为空');
-            return
-        }
-        if (change_log_en == null || change_log_en == '') {
-            alert('change_log_en不能为空');
-            return
-        }
-        $.post(baseUrl + 'api/mobile-v1/mobile.app.version.set', {
-            type: deviceIsAndroid ? 'android' : 'ios',
-            version: version,
-            build: build,
-            change_log: change_log,
-            change_log_en: change_log_en,
-            force_update: force_update ? '1' : '0',
-        }, function (data) {
+        $.post(baseUrl + 'api/mobile-v1/mobile.h5.web.version.new', function (data) {
             var text = JSON.stringify(data);
             document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2);
         })

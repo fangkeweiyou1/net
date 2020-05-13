@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/normalize.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/a5bmall.js"></script>
+    <style type="text/css">
+        body {
+            max-width: 540px;
+            min-width: 320px;
+            margin: 0 auto;
+            font-family: -apple-system, Helvetica, sans-serif;
+            background: white;
+            line-height: 1.5;
+            color: black;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            outline: 0;
+            font-size: 12px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .headbar_gen {
+            position: relative;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            padding: 0 16px;
+            font-size: 18px;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .headbar_gen img {
+            position: absolute;
+            left: 16px;
+            top: 8px;
+            height: 30px;
+        }
+
+        .headbar_gen button {
+            position: absolute;
+            right: 16px;
+            top: 8px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+        }
+
+        .item_gen {
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .stub {
+            flex: 1;
+        }
+
+        #user_img {
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+        }
+
+        .arrow_right {
+            height: 15px;
+        }
+
+        .fontColorGray {
+            color: darkgray;
+        }
+    </style>
+    <title>个人信息</title>
+</head>
+<body>
+<div class="gen">
+    <div class="headbar_gen">
+        <img src="images/ic_back.png" alt="" onclick="back()">
+        个人信息
+        <button>保存</button>
+    </div>
+    <div class="info_gen">
+        <div class="headimg_gen item_gen">
+            头像
+            <div class="stub"></div>
+            <img id="user_img" src="#" alt="">
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+        <div class="username_gen item_gen">
+            用户名
+            <div class="stub"></div>
+            <div id="username_value" class="fontColorGray"></div>
+        </div>
+        <div class="nickname_gen item_gen">
+            昵称
+            <div class="stub"></div>
+            <div id="nickname_value" class="fontColorGray"></div>
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+        <div class="gender_gen item_gen">
+            性别
+            <div class="stub"></div>
+            <div id="gender_value" class="fontColorGray"></div>
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+        <div class="birthday_gen item_gen">
+            出生日期
+            <div class="stub"></div>
+            <div id="birthday_value" class="fontColorGray"></div>
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+        <div class="country_gen item_gen">
+            地区
+            <div class="stub"></div>
+            <div id="country_value" class="fontColorGray"></div>
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+        <div class="detailaddress_gen item_gen">
+            详细地址
+            <div class="stub"></div>
+            <div id="detailaddress_value" class="fontColorGray"></div>
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+        <div class="email_gen item_gen">
+            电子邮箱
+            <div class="stub"></div>
+            <div id="email_value" class="fontColorGray"></div>
+            <img class="arrow_right" src="images/ic_arrow_right_black.png" alt="">
+        </div>
+    </div>
+</div>
+
+<script>
+    var user_img = document.querySelector('#user_img');
+    var username_value = document.querySelector('#username_value');
+    var nickname_value = document.querySelector('#nickname_value');
+    var gender_value = document.querySelector('#gender_value');
+    var birthday_value = document.querySelector('#birthday_value');
+    var country_value = document.querySelector('#country_value');
+    var detailaddress_value = document.querySelector('#detailaddress_value');
+    var email_value = document.querySelector('#email_value');
+
+    var user = $.cookie('a5bmall_user');
+    console.log("用户" + JSON.stringify(user));
+    user = JSON.parse(user);
+
+    setUserView();
+
+    function setUserView() {
+        if (user != null) {
+            //头像
+            user_img.src = user.face;
+            //用户名
+            username_value.innerText = user.uname;
+            //昵称
+            nickname_value.innerText = user.nickname;
+            //性别
+            console.log("sex:" + user.sex);
+            gender_value.innerText = (user.sex==1) ? "男" : "女";
+            //出生日期
+            birthday_value.innerText = dateFormat(user.birthday);
+            //地区
+            country_value.innerText = user.province+user.city+user.county+user.town;
+            //详细地址
+            detailaddress_value.innerText = user.address;
+            //电子邮箱
+            email_value.innerText = user.email;
+        }
+
+    }
+
+</script>
+</body>
+</html>

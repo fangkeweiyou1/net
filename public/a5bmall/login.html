@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/normalize.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/a5bmall.js"></script>
+    <script src="js/md5.js"></script>
+    <style type="text/css">
+        body {
+            max-width: 540px;
+            min-width: 320px;
+            margin: 0 auto;
+            font-family: -apple-system, Helvetica, sans-serif;
+            background: white;
+            line-height: 1.5;
+            color: black;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            outline: 0;
+            font-size: 12px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bottomRed3px {
+            border-bottom: 2px solid red;
+            color: red;
+        }
+
+        .bottomTrans3px {
+            border-bottom: 2px solid transparent;
+            color: black;
+        }
+
+        .headbar_gen {
+            position: relative;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            padding: 0 16px;
+            font-size: 18px;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .headbar_gen img {
+            position: absolute;
+            left: 16px;
+            top: 8px;
+            height: 30px;
+        }
+
+        .tab {
+            display: flex;
+            justify-content: space-around;
+            height: 40px;
+            line-height: 40px;
+            align-items: center;
+        }
+
+        .tab_userlogin, .tab_smslogin {
+            flex: 1;
+            text-align: center;
+        }
+
+        .userinput_gen, .passinput_gen, .imgcodeinput_gen {
+            display: flex;
+            justify-content: space-around;
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid lightgray;
+            margin: 3px 16px;
+            margin-top: 10px;
+        }
+
+        .userinput_gen input, .passinput_gen input, .imgcodeinput_gen input {
+            height: 100%;
+            flex: 1;
+            border: none;
+            margin-left: 20px;
+        }
+
+        .imgcodeinput_gen img {
+            height: 100%;
+            padding: 3px 0;
+            width: 60px;
+        }
+
+        #submit {
+            height: 36px;
+            width: 90%;
+            margin: 30px auto;
+            line-height: 36px;
+            background-color: deepskyblue;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            box-shadow: 0px 3px 10px #888888;
+        }
+    </style>
+    <title>登录</title>
+</head>
+<body>
+<div class="gen">
+    <div class="headbar_gen">
+        <img src="images/ic_back.png" alt="">
+        登录
+    </div>
+    <div class="tab">
+        <div class="tab_userlogin bottomRed3px" onclick="changeLoginType(true)">
+            账号登录
+        </div>
+        <div class="tab_smslogin bottomTrans3px" onclick="changeLoginType(false)">
+            快捷登录
+        </div>
+    </div>
+    <div class="userinput_gen">
+        账号<input type="text" placeholder="请输入账号" id="input_username">
+    </div>
+    <div class="passinput_gen">
+        密码<input type="password" placeholder="请输入密码" id="input_password">
+    </div>
+    <div class="imgcodeinput_gen">
+        验证码<input type="text" placeholder="请输入验证码" id="input_imgcode">
+        <img id="imgcode" src="images/ic_code.png" alt="" onclick="getImgCode()">
+    </div>
+    <div id="submit" onclick="submit()">登录</div>
+
+</div>
+
+<script>
+    //账号登录
+    var tab_userlogin = document.querySelector('.tab_userlogin');
+    //短信登录
+    var tab_smslogin = document.querySelector('.tab_smslogin');
+    //图片验证码
+    var imgcode = document.querySelector('#imgcode');
+    //账号
+    var input_username = document.querySelector('#input_username');
+    //密码
+    var input_password = document.querySelector('#input_password');
+    //验证码
+    var input_imgcode = document.querySelector('#input_imgcode');
+
+    var isUserLogin = true;
+
+    function changeLoginType(userLogin) {
+        isUserLogin = userLogin;
+        console.log('登录方式:' + userLogin);
+        if (isUserLogin) {
+            tab_userlogin.classList.add('bottomRed3px');
+            tab_userlogin.classList.remove('bottomTrans3px');
+            tab_smslogin.classList.remove('bottomRed3px');
+            tab_smslogin.classList.add('bottomTrans3px');
+        } else {
+            tab_smslogin.classList.add('bottomRed3px');
+            tab_smslogin.classList.remove('bottomTrans3px');
+            tab_userlogin.classList.remove('bottomRed3px');
+            tab_userlogin.classList.add('bottomTrans3px');
+        }
+        getImgCode()
+    }
+
+    console.log(baseUrl)
+    getImgCode();
+
+    /**
+     * todo 加载图片验证码图片
+     */
+    function getImgCode() {
+        $.get(baseUrl + "captchas/" + uuid + "/LOGIN", function (data) {
+            imgcode.src = baseUrl + "captchas/" + uuid + "/LOGIN";
+        });
+    }
+
+    function submit() {
+        if (isUserLogin) {
+            userLogin();
+        }
+    }
+
+    $.ajax({
+        statusCode: {
+            500: function () {
+                alert(" 500 data still loading");
+                console.log('500 ');
+            }
+        }
+    });
+
+    /**
+     * todo 账号登录
+     */
+    function userLogin() {
+        if (false) {
+            input_username.value = "aoao";
+            input_password.value = "123456";
+            input_imgcode.value = "1111";
+        }
+        var username = input_username.value;
+        var password = input_password.value;
+        var captcha = input_imgcode.value;
+        var loginUrl = baseUrl + "buyer/passport/login"
+//        $.get(baseUrl + "buyer/passport/login", {
+//            captcha: captcha,
+//            username: username,
+//            password: md5(password),
+//            uuid: uuid
+//        },success= function (data,status) {
+//                console.log("状态:"+status)
+//        },error=function (e) {
+//         alert("错误了")
+//        })
+        $.ajax({
+            url: loginUrl,
+            data: {
+                captcha: captcha,
+                username: username,
+                password: md5(password),
+                uuid: uuid
+            },
+            type: "get",
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log("XMLHttpRequest:" + JSON.stringify(XMLHttpRequest));
+                alert(XMLHttpRequest.responseJSON.message)
+                getImgCode()
+            },
+            /*  complete: function (XMLHttpRequest, textStatus) {
+                  if (textStatus == 'success') {
+
+                  }
+                  console.log("complete:" + textStatus);
+                  this; // 调用本次AJAX请求时传递的options参数
+              },*/
+            /*
+          {"uid":146,"username":"aoao","nickname":"aoao","access_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk2MjA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.34pe9UlJXV2AdTfexuhIpL1D18eduDqsjZY9hj6V6COF-4tFvsI4QV1me4t1LObOnN9X27RJm-NhBCWUPuIPmA","refresh_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk5ODA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.1L_b_GbDwGVaXPvU4xWCqjFSfQuVWjtE1seSsxk3AavtcseiKWiT5KiwYC0zPJyUd0gh3rSA84FgRwx-DrZTog","face":"http://47.88.173.86:82/testShopImg/20191214/D32EF223C702459EA2E4882E31BC7735.png"}
+            * */
+            success: function (data, textStatus) {
+//                alert("登陆成功:" + data.username)
+                $.cookie('a5bmall_token', data.access_token, {expires: 7, path: '/'});
+                Toast("登陆成功:" + data.username, 300, function () {
+                    getUserInfo(function (user) {
+                        $.cookie('a5bmall_user', JSON.stringify(user), {expires: 7, path: '/'});
+                        window.location.href = "main.html";
+                    });
+                });
+
+            }
+        })
+    }
+
+    //    Toast("登陆成功:",300,function () {
+    //        window.location.href = "profile.html";
+    //    });
+
+
+    //    setTimeout(function () {
+    //        window.location.href = "profile.html";
+    //    },1000);
+    //    test1(function () {
+    //       console.log("回调了")
+    //        window.location.href = "profile.html";
+    //    });
+    //    function test1(test2) {
+    //        test2();
+    //    }
+
+    //    $.cookie('name', 'value', { expires: 7 });
+
+</script>
+</body>
+</html>

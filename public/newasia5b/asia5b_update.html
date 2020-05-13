@@ -166,7 +166,7 @@
             var text = JSON.stringify(data);
             var result = JSON.parse(text);
             document.querySelector('.resultcontent').innerText = JSON.stringify(JSON.parse(text), null, 2)
-            if ((result.code == 200) || (result.code == 0)) {
+            if ((result.result == 200) || (result.result == 1)) {
                 var updateModel = result.data[0];
                 document.querySelector('#version').value = updateModel.version;
                 document.querySelector('#build').value = updateModel.build;

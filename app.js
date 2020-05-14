@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
+var bodyParser = require('body-parser');
+var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var util = require('util');
@@ -26,6 +28,15 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+app.use(bodyParser.urlencoded({extended: false}));
+/**
+ * todo createFormData  (image)  中第一个参数文件名一定要与后台完全一致,否则报500
+ */
+app.use(multer({dest: '/tmp/'}).array('image'));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 //todo
 //todo
@@ -116,7 +127,10 @@ app.get('/readDir', function (req, res) {
 /**
  *  todo 上传文件
  */
-app.post('/uploadFile', function (req, res) {
+app.post('/uploadFile/*', function (req, res) {
+    //具体文件类型
+    var childFilePath = req.params[0]
+    console.log(childFilePath);
     var inputFile = req.files[0];//From the name
     console.log(inputFile);// 上传的文件信息
     /**
@@ -128,7 +142,7 @@ app.post('/uploadFile', function (req, res) {
     console.log('文件大小：%s', inputFile.size);
     console.log('文件保存路径：%s', inputFile.path);
     // res.send('上传文件成功')
-    var des_file = __dirname + "/public/files/" + inputFile.originalname;//指定保存目录
+    var des_file = __dirname + "/public/files/" + childFilePath + "/" + inputFile.originalname;//指定保存目录
     fs.readFile(inputFile.path, function (err, data) {
         fs.writeFile(des_file, data, function (err) {
             if (err) {

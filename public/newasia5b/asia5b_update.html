@@ -124,6 +124,10 @@
     </label>
     <div class="line"></div>
     <label>
+        update_url<input id="update_url" type="text" placeholder="跳转地址,有就跳 没有就跳转谷歌商城">
+    </label>
+    <div class="line"></div>
+    <label>
         force_update(是否强制升级 0/1 否/是)<input id="force_update" type="checkbox">
     </label>
     <button onclick="submit()">设置</button>
@@ -171,6 +175,13 @@
                 document.querySelector('#version').value = updateModel.version;
                 document.querySelector('#build').value = updateModel.build;
                 console.log(JSON.stringify(updateModel));
+                if (httpIsCN && deviceIsAndroid) {
+                    document.querySelector('#change_log').value = '1.优化';
+                    document.querySelector('#change_log_en').value = '1.To solve the BUG';
+                }else {
+                    document.querySelector('#change_log').value = null;
+                    document.querySelector('#change_log_en').value = null;
+                }
             }
         });
     };
@@ -179,6 +190,7 @@
         var build = document.querySelector('#build').value;
         var change_log = document.querySelector('#change_log').value;
         var change_log_en = document.querySelector('#change_log_en').value;
+        var update_url = document.querySelector('#update_url').value;
         var force_update = document.querySelector('#force_update').checked;
         if (version == null || version == '') {
             alert('version不能为空');
@@ -202,6 +214,7 @@
             build: build,
             change_log: change_log,
             change_log_en: change_log_en,
+            update_url: update_url,
             force_update: force_update ? '1' : '0',
         }, function (data) {
             var text = JSON.stringify(data);
@@ -214,11 +227,20 @@
     function setHttpBaseUrl() {
         baseUrl = httpIsCN ? 'https://api.gim-allnet.com/' : 'https://asia-allnet.com/';
         document.querySelector('#httptype_title').innerText = '环境类型' + '(' + (httpIsCN ? '测试环境' : '正式环境') + ')';
+        setUpdatUrl();
     };
 
     function setDeviceTitle() {
         document.querySelector('#devicetype_title').innerText = '设备类型' + '(' + (deviceIsAndroid ? 'android' : 'ios') + ')';
+        setUpdatUrl();
     };
+    function setUpdatUrl() {
+        if (httpIsCN && deviceIsAndroid) {
+            document.querySelector('#update_url').value = "http://d.7short.com/596y";
+        } else {
+            document.querySelector('#update_url').value = null;
+        }
+    }
 </script>
 </body>
 </html>

@@ -14,6 +14,9 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="javascripts/utils.js"></script>
+    <script>
+    </script>
     <style type="text/css">
         .applist li img {
             width: 50px;
@@ -30,10 +33,46 @@
             display: flex;
             flex-direction: column;
             margin-left: 20px;
+            align-items: center;
         }
 
         .links a:nth-child(n+2) {
             /*margin-top: 10px;*/
+        }
+
+        /*a  upload */
+        .a-upload {
+            /*padding: 4px 10px;*/
+            height: 30px;
+            line-height: 30px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            margin-left: 10px;
+        }
+
+        .a-upload input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
         }
     </style>
     <title>武时亿安卓APP列表</title>
@@ -47,14 +86,11 @@
         <div>武时亿WMS</div>
 
         <div class="links">
-            <span>
+            <span style="display: flex;align-items: center">
                 <a href="download.html?type=wms">测试</a>
-                <input name="image" formenctype="multipart/form-data" type="file" style="display: inline-block;"
-                       onchange="uploadFile('wms')">
-            </span>
-            <span>
-            <a href="download.html?type=wms">正式</a>
-                <a href="download.html?type=wms" style="margin-left: 20px">上传文件</a>
+                 <a href="javascript:;" class="a-upload">
+        <input type="file" name="" id="" onchange="uploadFileService(this,'wms')">上传最新文件
+                </a>
             </span>
         </div>
     </li>
@@ -168,17 +204,35 @@
     <li>
         <img src="images/ic_others.png">
 
-        <div>A5BMALL</div>
+        <div onclick="printLocalIp()">A5BMALL</div>
 
         <div class="links">
             <a href="a5bmall/main.html">进入</a>
         </div>
     </li>
+
+
 </ul>
 </div>
 <script>
-    function uploadFile(type) {
 
+    function uploadFileService(input, type) {
+        console.log(input.files[0]);
+        var formData = new FormData();
+        formData.append("image", input.files[0]);
+        formData.append("service", 'App.Passion.UploadFile');
+        $.ajax({
+            url: getLocalIpAll() + "uploadFile" + "/" + type,
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                console.log(JSON.stringify(res));
+                console.log(res.message)
+//                alert((JSON.parse(JSON.stringify(res))).message);
+            }
+        })
     }
 </script>
 

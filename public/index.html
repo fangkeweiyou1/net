@@ -225,11 +225,14 @@
             url: getLocalIpAll() + "uploadFile" + "/" + type,
             type: 'post',
             data: formData,
+            //todo 表示接收格式
+            dataType: 'json',
             contentType: false,
             processData: false,
             success: function (res) {
                 console.log(JSON.stringify(res));
-                console.log(res.message)
+                var resultModel=JSON.parse(JSON.stringify(res));
+                console.log(resultModel.message)
 //                alert((JSON.parse(JSON.stringify(res))).message);
             }
         })

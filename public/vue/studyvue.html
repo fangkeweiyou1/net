@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学习VUE1</title>
+</head>
+<body>
+<div id="app">
+    <div v-cloak>{{msg}}</div>
+    <div v-text="msg"></div>
+<div>{{1 + 3}}</div>
+</div>
+
+<script type="text/javascript" src="../../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue'
+        }
+    });
+</script>
+</body>
+</html>

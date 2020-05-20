@@ -1,0 +1,43 @@
+body {
+    max-width: 540px;
+    min-width: 320px;
+    margin: 0 auto;
+    font-family: -apple-system, Helvetica, sans-serif;
+    background: #f2f2f2;
+    line-height: 1.5;
+    color: black;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: 0;
+    font-size: 12px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+button {
+    border: none;
+}
+
+#loadingImg {
+    width: 2rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}

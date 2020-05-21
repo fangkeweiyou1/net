@@ -17,21 +17,132 @@ var uuid = "02:00:00:00:00:00";
                         console.log("属性:"+i)
                     }
 * */
+var user = null;
+
+/**
+ * 获取缓存信息
+ * @returns {*}
+ */
+function getUser() {
+    if (user != null) {
+        return user;
+    }
+
+    try {
+        user = $.cookie('a5bmall_user');
+        console.log("用户" + JSON.stringify(user));
+        user = JSON.parse(user);
+    } catch (e) {
+        user = null;
+    }
+    return user;
+}
+
+/**
+ * 进入个人信息页面
+ */
+function startProfile() {
+    if (getUser() == null) {
+        window.location.href = "login.html";
+    } else {
+        window.location.href = "profile.html";
+    }
+}
+
+/**
+ * 退出
+ */
+function logout() {
+    $.cookie('a5bmall_user', null, {expires: 7, path: '/'});
+    getUser()
+}
 
 function back() {
     window.history.back(-1);
 }
 
 function showLoading() {
-   var loadingImg= document.createElement("img");
-    loadingImg.src="images/loading.gif";
-    loadingImg.id="loadingImg";
+    var loadingImg = document.createElement("img");
+    loadingImg.src = "images/loading.gif";
+    loadingImg.id = "loadingImg";
     document.body.appendChild(loadingImg)
 }
 
 function dismissLoading() {
-    var loadingImg=  document.querySelector("#loadingImg");
+    var loadingImg = document.querySelector("#loadingImg");
     document.body.removeChild(loadingImg)
+}
+
+function setHeadBarTitle(titleName) {
+    //找到父容器
+    var headBarTitle = document.querySelector("#headBarTitle");
+    headBarTitle.innerText=titleName
+}
+
+function addCommonNav(navIndex) {
+    //找到父容器
+    var commonNav = document.querySelector("#commonNav");
+    for (var i = 0; i < 4; i++) {
+        var commonNavItem = document.createElement('div')
+        commonNavItem.id = "commonNavItem";
+        var img = document.createElement('img')
+        var p = document.createElement('p')
+        if (i == 0) {
+            img.src = "images/ic_home_unselected.png";
+            p.style.color = "#333";
+            if (navIndex == i) {
+                img.src = "images/ic_home_selected.png";
+                p.style.color = "#4B9DD6";
+            } else {
+                commonNavItem.onclick = function () {
+                    alert("首页")
+                }
+            }
+            p.innerText = "首页";
+        } else if (i == 1) {
+            img.src = "images/ic_classification_normal.png";
+            p.style.color = "#333";
+            if (navIndex == i) {
+                img.src = "images/ic_classification_selected.png";
+                p.style.color = "#4B9DD6";
+            } else {
+                commonNavItem.onclick = function () {
+                    alert("分类")
+                }
+            }
+            p.innerText = "分类";
+        } else if (i == 2) {
+            img.src = "images/ic_shopping_cart_normal.png";
+            p.style.color = "#333";
+            if (navIndex == i) {
+                img.src = "images/ic_shopping_cart_selected.png";
+                p.style.color = "#4B9DD6";
+            } else {
+                commonNavItem.onclick = function () {
+                    alert("购物车")
+                }
+            }
+            p.innerText = "购物车";
+        } else {
+            img.src = "images/ic_personal_center_normal.png";
+            p.style.color = "#333";
+            if (navIndex == i) {
+                img.src = "images/ic_personal_center_selected.png";
+                p.style.color = "#4B9DD6";
+            } else {
+                commonNavItem.onclick = function () {
+                    alert("我的")
+                }
+            }
+            p.innerText = "我的";
+        }
+        commonNavItem.appendChild(img);
+        commonNavItem.appendChild(p);
+        commonNav.appendChild(commonNavItem);
+    }
+    //给导航栏底部留宽度
+    var commonFooter = document.querySelector("#commonFooter");
+    commonFooter.style.height = commonNav.offsetHeight + ".px";
 }
 
 
@@ -77,6 +188,7 @@ function getMemberOther(callback) {
     $.ajax({
         url: baseUrl + "buyer/members/statistics",
         type: "get",
+        dataType: 'json',
         headers: {
             Accept: "application/json; charset=utf-8",
             Authorization: $.cookie('a5bmall_token')
@@ -218,6 +330,7 @@ function getMenu(callback) {
         }
     });
 }
+
 /*
 {
     "navigation_id": 69,

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/normalize.css" type="text/css" rel="stylesheet">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery.cookie.min.js"></script>
+    <script src="js/jroll.js"></script>
+    <script src="js/a5bmall.js"></script>
+    <script src="../javascripts/flexible.js"></script>
+    <link href="css/common.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+
+
+        .top_gen {
+            background: linear-gradient(#00A7FA, #0077F4);
+            width: 100%;
+            padding-bottom: 0.2rem;
+        }
+
+        .setting_gen {
+            width: 100%;
+            padding: 0.16rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .headimg_gen {
+            padding-left: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-size: 0.42rem;
+            margin: 0.3rem 0;
+        }
+
+        #headimg {
+            height: 1rem;
+            width: 1rem;
+            border-radius: 1rem;
+            border: 2px solid white;
+            margin-right: 6px;
+        }
+
+        .guanzhu_gen {
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            font-size: 0.3rem;
+        }
+
+        .guanzhu_item_gen {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+        }
+
+        /*----------order start------------*/
+        /**/
+        /**/
+        /**/
+        /**/
+        .order_gen {
+            background-color: white;
+            padding: 0.36rem;
+            margin-top: 0.3rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.3rem;
+        }
+
+        .order_item_gen {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .order_item_gen img {
+            height: 0.5rem;
+            margin-bottom: 0.1rem;
+        }
+
+        /*----------order end------------*/
+
+        /*----------service start------------*/
+        .myservice_gen {
+            margin-top: 0.3rem;
+            padding: 0.16rem 0.36rem;
+            background-color: white;
+            border-bottom: 1px solid lightgray;
+            font-size: 0.4rem;
+        }
+
+        .service_gen {
+            background-color: white;
+            padding: 26px 16px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.3rem;
+        }
+
+        .service_item_gen {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service_item_gen img {
+            height: 0.6rem;
+            margin-bottom: 4px;
+        }
+
+        /*----------service end------------*/
+
+        /*----------guess start------------*/
+        #guess_gen {
+            width: 96%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            overflow: hidden;
+            margin: 0.2rem auto;
+        }
+
+        .goods_item {
+            flex: 49%;
+            background-color: white;
+            margin-bottom: 0.2rem;
+            border-radius: 0.2rem;
+            overflow: hidden;
+        }
+
+        .divider {
+            flex: 2%;
+        }
+
+        .goods_item img {
+            width: 100%;
+            height: 4rem;
+            vertical-align: top;
+            display: block;
+            border: 0;
+        }
+
+        .goods_name {
+            font-size: 0.14rem;
+            margin: 0.1rem;
+        }
+
+        /*----------guess end------------*/
+    </style>
+    <title>A5BMALL</title>
+</head>
+<body>
+
+<div class="app">
+    <div class="top_gen">
+        <div class="setting_gen">
+            <img src="images/ic_mine_setting.png" alt="" style="height: 20px;" onclick="logout()">
+            <img src="images/ic_mine_message.png" alt="" style="height: 20px;margin-left: 10px">
+        </div>
+        <div class="headimg_gen" onclick="startProfile()">
+            <img id="headimg" src="images/head_default.png" alt="">
+            <div id="username">未登录</div>
+        </div>
+        <div class="guanzhu_gen">
+            <div class="guanzhu_item_gen">
+                <div class="guanzhu_value">0</div>
+                <div class="guanzhu_name">商品关注</div>
+            </div>
+            <div class="guanzhu_item_gen">
+                <div class="shop_value">0</div>
+                <div class="shop_name">店铺关注</div>
+            </div>
+            <div class="guanzhu_item_gen">
+                <div class="coupon_value">0</div>
+                <div class="coupon_name">优惠券</div>
+            </div>
+            <div class="guanzhu_item_gen">
+                <div class="foot_value">0</div>
+                <div class="foot_name">我的足迹</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="order_gen">
+        <div class="order_item_gen">
+            <img src="images/ic_mine_pay1.png" alt="">
+            代付款
+        </div>
+        <div class="order_item_gen">
+            <img src="images/ic_mine_applypack.png" alt="">
+            申请打包
+        </div>
+        <div class="order_item_gen">
+            <img src="images/ic_mine_commens.png" alt="">
+            补差价
+        </div>
+        <div class="order_item_gen">
+            <img src="images/ic_mine_changegoods.png" alt="">
+            退款/售后
+        </div>
+        <div class="order_item_gen">
+            <img src="images/ic_mine_myorder.png" alt="">
+            我的订单
+        </div>
+    </div>
+
+    <div class="myservice_gen">我的服务</div>
+    <div class="service_gen">
+        <div class="service_item_gen">
+            <img src="images/ic_mine_zhanghuchongzhi.png" alt="">
+            账户充值
+        </div>
+        <div class="service_item_gen">
+            <img src="images/ic_mine_zhanghuquxian.png" alt="">
+            账户取现
+        </div>
+        <div class="service_item_gen">
+            <img src="images/ic_mine_yuemingxi.png" alt="">
+            余额明细
+        </div>
+        <div class="service_item_gen">
+            <img src="images/ic_mine_wodepingjia.png" alt="">
+            我的评价
+        </div>
+    </div>
+
+    <div id="guess_gen"></div>
+    <div id="commonNav"></div>
+    <!--给导航栏预留位置的-->
+    <div id="commonFooter"></div>
+
+</div>
+
+<script>
+
+    var headimg_gen = document.querySelector('.headimg_gen');
+    var headimg = document.querySelector('#headimg');
+    var username = document.querySelector('#username');
+
+    /*web准备完毕*/
+    $(document).ready(function () {
+        //添加底部导航栏
+        addCommonNav(3);
+
+        /**
+         * 猜你喜欢
+         */
+        getMineGuessLike(function (data) {
+            var guess_gen = document.querySelector("#guess_gen");
+            var list = data.data.data;
+            console.log("length:" + list.length);
+            for (var i = 0; i < list.length; i++) {
+                var goods = list[i];
+                var goods_item = document.createElement("div")
+                goods_item.classList.add("goods_item");
+                var goods_item_img = document.createElement("img")
+                goods_item_img.src = goods.small;
+                //添加商品图片
+                goods_item.appendChild(goods_item_img);
+                var goods_name = document.createElement("p")
+                goods_name.classList.add("goods_name");
+                goods_name.innerText = goods.name;
+                //添加商品名称
+                goods_item.appendChild(goods_name);
+
+                //添加商品item
+                guess_gen.appendChild(goods_item);
+                //添加分割线
+                if (i % 2 == 0) {
+                    var divider = document.createElement("div")
+                    divider.classList.add("divider");
+                    guess_gen.appendChild(divider);
+                }
+            }
+        });
+
+        var user = getUser();
+        if (user != null) {
+            setUserView();
+        }
+
+        function setUserView() {
+            if (user != null) {
+                //头像
+                headimg.src = user.face;
+                //用户名
+                username.innerText = user.uname;
+            } else {
+                //头像
+                headimg.src = "images/head_default.png";
+                //用户名
+                username.innerText = "未登录";
+            }
+
+        }
+
+        getMemberOther(function (memberCountModel) {
+            document.querySelector(".guanzhu_value").innerText = memberCountModel.goods_collect_count
+            document.querySelector(".shop_value").innerText = memberCountModel.shop_collect_count
+            document.querySelector(".coupon_value").innerText = memberCountModel.coupon_collect_count
+            document.querySelector(".foot_value").innerText = memberCountModel.history_collect_count
+        });
+
+
+    });
+
+
+</script>
+
+</body>
+</html>

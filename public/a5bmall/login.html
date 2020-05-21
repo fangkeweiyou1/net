@@ -6,63 +6,30 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="../css/normalize.css" type="text/css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery.cookie.min.js"></script>
+    <script src="js/jroll.js"></script>
     <script src="js/a5bmall.js"></script>
+    <script src="../javascripts/flexible.js"></script>
     <script src="js/md5.js"></script>
+    <link href="css/common.css" type="text/css" rel="stylesheet">
     <style type="text/css">
-        body {
-            max-width: 540px;
-            min-width: 320px;
-            margin: 0 auto;
-            font-family: -apple-system, Helvetica, sans-serif;
-            background: white;
-            line-height: 1.5;
-            color: black;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            outline: 0;
-            font-size: 12px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
 
         .bottomRed3px {
-            border-bottom: 2px solid red;
+            border-bottom: 0.02rem solid red;
             color: red;
         }
 
         .bottomTrans3px {
-            border-bottom: 2px solid transparent;
+            border-bottom: 0.02rem solid transparent;
             color: black;
-        }
-
-        .headbar_gen {
-            position: relative;
-            height: 46px;
-            line-height: 46px;
-            text-align: center;
-            padding: 0 16px;
-            font-size: 18px;
-            border-bottom: 1px solid lightgray;
-        }
-
-        .headbar_gen img {
-            position: absolute;
-            left: 16px;
-            top: 8px;
-            height: 30px;
         }
 
         .tab {
             display: flex;
             justify-content: space-around;
-            height: 40px;
-            line-height: 40px;
+            height: 0.4rem;
+            line-height: 0.4rem;
             align-items: center;
         }
 
@@ -74,10 +41,10 @@
         .userinput_gen, .passinput_gen, .imgcodeinput_gen {
             display: flex;
             justify-content: space-around;
-            height: 40px;
-            line-height: 40px;
+            height: 0.4rem;
+            line-height: 0.4rem;
             border-bottom: 1px solid lightgray;
-            margin: 3px 16px;
+            margin: 0.03rem 0.16rem;
             margin-top: 10px;
         }
 
@@ -85,35 +52,38 @@
             height: 100%;
             flex: 1;
             border: none;
-            margin-left: 20px;
+            margin-left: 0.2rem;
         }
 
         .imgcodeinput_gen img {
             height: 100%;
             padding: 3px 0;
-            width: 60px;
+            width: 0.6rem;
         }
 
         #submit {
-            height: 36px;
+            height: 0.36rem;
             width: 90%;
-            margin: 30px auto;
-            line-height: 36px;
+            margin: 0.3rem auto;
+            line-height: 0.36rem;
             background-color: deepskyblue;
             border-radius: 5px;
             color: white;
             text-align: center;
-            box-shadow: 0px 3px 10px #888888;
+            box-shadow: 0rem 0.03rem 0.1rem #888888;
         }
     </style>
     <title>登录</title>
 </head>
 <body>
 <div class="gen">
-    <div class="headbar_gen">
-        <img src="images/ic_back.png" alt="">
-        登录
+
+    <!--标题栏-->
+    <div id="headBar">
+        <img src="images/ic_back.png" alt="" onclick="back()">
+        <p id="headBarTitle"></p>
     </div>
+
     <div class="tab">
         <div class="tab_userlogin bottomRed3px" onclick="changeLoginType(true)">
             账号登录
@@ -134,9 +104,17 @@
     </div>
     <div id="submit" onclick="submit()">登录</div>
 
+    <div style="height: 2000px"></div>
 </div>
 
 <script>
+
+    /*web准备完毕*/
+    $(document).ready(function () {
+        //设置标题栏
+        setHeadBarTitle("登录")
+    });
+
     //账号登录
     var tab_userlogin = document.querySelector('.tab_userlogin');
     //短信登录
@@ -249,7 +227,7 @@
                 Toast("登陆成功:" + data.username, 300, function () {
                     getUserInfo(function (user) {
                         $.cookie('a5bmall_user', JSON.stringify(user), {expires: 7, path: '/'});
-                        window.location.href = "main.html";
+                        window.location.href = "main_mine.html";
                     });
                 });
 

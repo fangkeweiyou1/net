@@ -2,10 +2,10 @@
 /*rem常用定义*/
 /*常用文字大小*/
 rem12Px{
-    font-size: 0.373rem;
+    font-size: 0.32rem;
 }
 rem14Px{
-    font-size: 0.374rem;
+    font-size: 0.373rem;
 }
 /*标题栏*/
 rem18Px{
@@ -26,7 +26,7 @@ body {
     color: black;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     outline: 0;
-    font-size: 12px;
+    font-size: 0.32rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -69,7 +69,7 @@ button {
     bottom: 0;
     width: 100%;
     display: flex;
-    font-size: 0.12rem;
+    font-size: 0.32rem;
     border-top: 0.03rem solid lightgray;
     background-color: white;
 }
@@ -91,23 +91,25 @@ button {
 
 /*标题栏*/
 #headBar {
-    height: 1.2rem;
+    height: 1.227rem;
     position: fixed;
     margin: 0;
     padding: 0;
     top: 0;
     left: 0;
     width: 100%;
-    font-size: 0.52rem;
     background-color: white;
-    border-bottom: 0.03rem solid lightgray;
+    border-bottom: 0.027rem solid lightgray;
 }
 
 #headBar img {
     position: absolute;
     left: 0;
-    height: 100%;
-    padding: 46px;
+    top: 0;
+    bottom: 0;
+    height: 70%;
+    margin: auto 0.427rem;
+    display: inline-block;
 }
 
 #headBar p {
@@ -116,4 +118,5 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.48rem;
 }

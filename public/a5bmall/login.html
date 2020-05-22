@@ -14,22 +14,25 @@
     <script src="js/md5.js"></script>
     <link href="css/common.css" type="text/css" rel="stylesheet">
     <style type="text/css">
+        .gen{
+            background-color: white;
+        }
 
         .bottomRed3px {
-            border-bottom: 0.02rem solid red;
+            border-bottom: 0.027rem solid red;
             color: red;
         }
 
         .bottomTrans3px {
-            border-bottom: 0.02rem solid transparent;
+            border-bottom: 0.027rem solid transparent;
             color: black;
         }
 
         .tab {
             display: flex;
             justify-content: space-around;
-            height: 0.4rem;
-            line-height: 0.4rem;
+            height: 1.067rem;
+            line-height: 1.067rem;
             align-items: center;
         }
 
@@ -41,36 +44,37 @@
         .userinput_gen, .passinput_gen, .imgcodeinput_gen {
             display: flex;
             justify-content: space-around;
-            height: 0.4rem;
-            line-height: 0.4rem;
-            border-bottom: 1px solid lightgray;
-            margin: 0.03rem 0.16rem;
-            margin-top: 10px;
+            height: 1.067rem;
+            line-height: 1.067rem;
+            border-bottom: 0.027rem solid lightgray;
+            margin: 0.267rem 0.427rem 0 0.427rem;
+            font-size: 0.32rem;
         }
 
         .userinput_gen input, .passinput_gen input, .imgcodeinput_gen input {
             height: 100%;
             flex: 1;
             border: none;
-            margin-left: 0.2rem;
+            margin-left: 0.267rem;
         }
 
         .imgcodeinput_gen img {
             height: 100%;
-            padding: 3px 0;
-            width: 0.6rem;
+            padding: 0.08rem 0;
+            width: 1.6rem;
         }
 
         #submit {
-            height: 0.36rem;
+            height: 0.96rem;
             width: 90%;
-            margin: 0.3rem auto;
-            line-height: 0.36rem;
+            margin: 0.267rem auto;
+            line-height: 0.96rem;
             background-color: deepskyblue;
-            border-radius: 5px;
+            border-radius: 0.133rem;
             color: white;
             text-align: center;
             box-shadow: 0rem 0.03rem 0.1rem #888888;
+            font-size: 0.32rem;
         }
     </style>
     <title>登录</title>
@@ -212,15 +216,15 @@
                 getImgCode()
             },
             /*  complete: function (XMLHttpRequest, textStatus) {
-                  if (textStatus == 'success') {
+             if (textStatus == 'success') {
 
-                  }
-                  console.log("complete:" + textStatus);
-                  this; // 调用本次AJAX请求时传递的options参数
-              },*/
+             }
+             console.log("complete:" + textStatus);
+             this; // 调用本次AJAX请求时传递的options参数
+             },*/
             /*
-          {"uid":146,"username":"aoao","nickname":"aoao","access_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk2MjA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.34pe9UlJXV2AdTfexuhIpL1D18eduDqsjZY9hj6V6COF-4tFvsI4QV1me4t1LObOnN9X27RJm-NhBCWUPuIPmA","refresh_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk5ODA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.1L_b_GbDwGVaXPvU4xWCqjFSfQuVWjtE1seSsxk3AavtcseiKWiT5KiwYC0zPJyUd0gh3rSA84FgRwx-DrZTog","face":"http://47.88.173.86:82/testShopImg/20191214/D32EF223C702459EA2E4882E31BC7735.png"}
-            * */
+             {"uid":146,"username":"aoao","nickname":"aoao","access_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk2MjA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.34pe9UlJXV2AdTfexuhIpL1D18eduDqsjZY9hj6V6COF-4tFvsI4QV1me4t1LObOnN9X27RJm-NhBCWUPuIPmA","refresh_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk5ODA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.1L_b_GbDwGVaXPvU4xWCqjFSfQuVWjtE1seSsxk3AavtcseiKWiT5KiwYC0zPJyUd0gh3rSA84FgRwx-DrZTog","face":"http://47.88.173.86:82/testShopImg/20191214/D32EF223C702459EA2E4882E31BC7735.png"}
+             * */
             success: function (data, textStatus) {
 //                alert("登陆成功:" + data.username)
                 $.cookie('a5bmall_token', data.access_token, {expires: 7, path: '/'});

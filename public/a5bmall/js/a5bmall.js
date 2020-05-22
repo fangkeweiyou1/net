@@ -24,9 +24,9 @@ var user = null;
  * @returns {*}
  */
 function getUser() {
-    if (user != null) {
-        return user;
-    }
+    // if (user != null) {
+    //     return user;
+    // }
 
     try {
         user = $.cookie('a5bmall_user');
@@ -95,7 +95,8 @@ function addCommonNav(navIndex) {
                 p.style.color = "#4B9DD6";
             } else {
                 commonNavItem.onclick = function () {
-                    alert("首页")
+                    // alert("首页")
+                    window.location.href = "main_home.html";
                 }
             }
             p.innerText = "首页";
@@ -131,7 +132,8 @@ function addCommonNav(navIndex) {
                 p.style.color = "#4B9DD6";
             } else {
                 commonNavItem.onclick = function () {
-                    alert("我的")
+                    // alert("我的")
+                    window.location.href = "main_mine.html";
                 }
             }
             p.innerText = "我的";

@@ -18,25 +18,26 @@
         .top_gen {
             background: linear-gradient(#00A7FA, #0077F4);
             width: 100%;
-            padding-bottom: 0.2rem;
+            padding-bottom: 0.267rem;
         }
 
         .setting_gen {
             width: 100%;
-            padding: 0.16rem;
+            padding: 0.267rem;
             display: flex;
             justify-content: flex-end;
             align-items: center;
         }
 
         .headimg_gen {
-            padding-left: 0.6rem;
+            padding-left: 0.533rem;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             color: white;
-            font-size: 0.42rem;
-            margin: 0.3rem 0;
+            font-size: 0.427rem;
+            margin: 0.267rem 0;
+            margin-top: 0;
         }
 
         #headimg {
@@ -51,7 +52,7 @@
             display: flex;
             justify-content: space-around;
             color: white;
-            font-size: 0.3rem;
+            font-size: 0.32rem;
         }
 
         .guanzhu_item_gen {
@@ -68,11 +69,11 @@
         /**/
         .order_gen {
             background-color: white;
-            padding: 0.36rem;
-            margin-top: 0.3rem;
+            padding: 0.36rem 0;
+            margin-top: 0.267rem;
             display: flex;
             align-items: center;
-            font-size: 0.3rem;
+            font-size: 0.32rem;
         }
 
         .order_item_gen {
@@ -91,20 +92,20 @@
 
         /*----------service start------------*/
         .myservice_gen {
-            margin-top: 0.3rem;
-            padding: 0.16rem 0.36rem;
+            margin-top: 0.267rem;
+            padding: 0.133rem 0.427rem;
             background-color: white;
             border-bottom: 1px solid lightgray;
-            font-size: 0.4rem;
+            font-size: 0.373rem;
         }
 
         .service_gen {
             background-color: white;
-            padding: 26px 16px;
-            margin-top: 10px;
+            padding: 0.267rem 0;
+            margin-top: 0.267rem;
             display: flex;
             align-items: center;
-            font-size: 0.3rem;
+            font-size: 0.32rem;
         }
 
         .service_item_gen {
@@ -116,7 +117,7 @@
 
         .service_item_gen img {
             height: 0.6rem;
-            margin-bottom: 4px;
+            margin-bottom: 0.107rem;
         }
 
         /*----------service end------------*/
@@ -152,7 +153,7 @@
         }
 
         .goods_name {
-            font-size: 0.14rem;
+            font-size: 0.32rem;
             margin: 0.1rem;
         }
 
@@ -253,41 +254,49 @@
         //添加底部导航栏
         addCommonNav(3);
 
-        /**
-         * 猜你喜欢
-         */
-        getMineGuessLike(function (data) {
-            var guess_gen = document.querySelector("#guess_gen");
-            var list = data.data.data;
-            console.log("length:" + list.length);
-            for (var i = 0; i < list.length; i++) {
-                var goods = list[i];
-                var goods_item = document.createElement("div")
-                goods_item.classList.add("goods_item");
-                var goods_item_img = document.createElement("img")
-                goods_item_img.src = goods.small;
-                //添加商品图片
-                goods_item.appendChild(goods_item_img);
-                var goods_name = document.createElement("p")
-                goods_name.classList.add("goods_name");
-                goods_name.innerText = goods.name;
-                //添加商品名称
-                goods_item.appendChild(goods_name);
+        function getMineGuessLike2() {
+            /**
+             * 猜你喜欢
+             */
+            getMineGuessLike(function (data) {
+                var guess_gen = document.querySelector("#guess_gen");
+                var list = data.data.data;
+                console.log("length:" + list.length);
+                for (var i = 0; i < list.length; i++) {
+                    var goods = list[i];
+                    var goods_item = document.createElement("div")
+                    goods_item.classList.add("goods_item");
+                    var goods_item_img = document.createElement("img")
+                    goods_item_img.src = goods.small;
+                    //添加商品图片
+                    goods_item.appendChild(goods_item_img);
+                    var goods_name = document.createElement("p")
+                    goods_name.classList.add("goods_name");
+                    goods_name.innerText = goods.name;
+                    //添加商品名称
+                    goods_item.appendChild(goods_name);
 
-                //添加商品item
-                guess_gen.appendChild(goods_item);
-                //添加分割线
-                if (i % 2 == 0) {
-                    var divider = document.createElement("div")
-                    divider.classList.add("divider");
-                    guess_gen.appendChild(divider);
+                    //添加商品item
+                    guess_gen.appendChild(goods_item);
+                    //添加分割线
+                    if (i % 2 == 0) {
+                        var divider = document.createElement("div")
+                        divider.classList.add("divider");
+                        guess_gen.appendChild(divider);
+                    }
                 }
-            }
-        });
+            });
+        }
+
+
 
         var user = getUser();
         if (user != null) {
             setUserView();
+
+            getMineGuessLike2();
+
+            getMemberOther2();
         }
 
         function setUserView() {
@@ -305,12 +314,16 @@
 
         }
 
-        getMemberOther(function (memberCountModel) {
-            document.querySelector(".guanzhu_value").innerText = memberCountModel.goods_collect_count
-            document.querySelector(".shop_value").innerText = memberCountModel.shop_collect_count
-            document.querySelector(".coupon_value").innerText = memberCountModel.coupon_collect_count
-            document.querySelector(".foot_value").innerText = memberCountModel.history_collect_count
-        });
+        function getMemberOther2() {
+            getMemberOther(function (memberCountModel) {
+                document.querySelector(".guanzhu_value").innerText = memberCountModel.goods_collect_count
+                document.querySelector(".shop_value").innerText = memberCountModel.shop_collect_count
+                document.querySelector(".coupon_value").innerText = memberCountModel.coupon_collect_count
+                document.querySelector(".foot_value").innerText = memberCountModel.history_collect_count
+            });
+        }
+
+
 
 
     });

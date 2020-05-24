@@ -108,7 +108,8 @@ function addCommonNav(navIndex) {
                 p.style.color = "#4B9DD6";
             } else {
                 commonNavItem.onclick = function () {
-                    alert("分类")
+                    // alert("分类")
+                    window.location.href = "main_cate.html";
                 }
             }
             p.innerText = "分类";
@@ -403,5 +404,42 @@ function getMineGuessLike(callback) {
             callback(data);
         }
     });
+    
+    
+    function loadLeftCate(parent_id,callback) {
+        $.ajax({
+            url: baseUrl + "buyer/goods/categories/"+parent_id+"/children",
+            type: "get",
+            dataType: 'json',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                Authorization: $.cookie('a5bmall_token')
+            },
+            error: function () {
+                // callback(null);
+            },
+            success: function (data, status) {
+                callback(data);
+            }
+        });
+    }
+
+    function loadRightCate(child_id,callback) {
+        $.ajax({
+            url: baseUrl + "buyer/goods/categories/"+child_id+"/children",
+            type: "get",
+            dataType: 'json',
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                Authorization: $.cookie('a5bmall_token')
+            },
+            error: function () {
+                // callback(null);
+            },
+            success: function (data, status) {
+                callback(data);
+            }
+        });
+    }
 }
 

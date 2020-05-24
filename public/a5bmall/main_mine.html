@@ -166,7 +166,7 @@
 <div class="app">
     <div class="top_gen">
         <div class="setting_gen">
-            <img src="images/ic_mine_setting.png" alt="" style="height: 20px;" onclick="logout()">
+            <img id="ic_mine_setting" src="images/ic_mine_setting.png" alt="" style="height: 20px;">
             <img src="images/ic_mine_message.png" alt="" style="height: 20px;margin-left: 10px">
         </div>
         <div class="headimg_gen" onclick="startProfile()">
@@ -289,15 +289,14 @@
         }
 
 
-
         var user = getUser();
         if (user != null) {
             setUserView();
 
-            getMineGuessLike2();
 
             getMemberOther2();
         }
+        getMineGuessLike2();
 
         function setUserView() {
             if (user != null) {
@@ -316,14 +315,26 @@
 
         function getMemberOther2() {
             getMemberOther(function (memberCountModel) {
-                document.querySelector(".guanzhu_value").innerText = memberCountModel.goods_collect_count
-                document.querySelector(".shop_value").innerText = memberCountModel.shop_collect_count
-                document.querySelector(".coupon_value").innerText = memberCountModel.coupon_collect_count
-                document.querySelector(".foot_value").innerText = memberCountModel.history_collect_count
+                document.querySelector(".guanzhu_value").innerText = memberCountModel.goods_collect_count;
+                document.querySelector(".shop_value").innerText = memberCountModel.shop_collect_count;
+                document.querySelector(".coupon_value").innerText = memberCountModel.coupon_collect_count;
+                document.querySelector(".foot_value").innerText = memberCountModel.history_collect_count;
             });
         }
 
 
+        var ic_mine_setting=document.querySelector("#ic_mine_setting");
+        ic_mine_setting.addEventListener('click',function () {
+            logout();
+            Toast("退出登录",300,null);
+            user = getUser();
+            setUserView();
+
+            document.querySelector(".guanzhu_value").innerText = 0;
+            document.querySelector(".shop_value").innerText = 0;
+            document.querySelector(".coupon_value").innerText = 0;
+            document.querySelector(".foot_value").innerText = 0;
+        });
 
 
     });

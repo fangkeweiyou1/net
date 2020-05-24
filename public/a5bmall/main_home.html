@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery.cookie.min.js"></script>
+    <script src="js/a5bmall.js"></script>
+    <script src="js/md5.js"></script>
+    <!--https://www.swiper.com.cn/api/autoplay/19.html-->
+    <script src="../../node_modules/swiper/js/swiper.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../node_modules/swiper/css/swiper.css">
+    <script src="../javascripts/flexible.js"></script>
+    <link href="../css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="css/common.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+
+        /*----------菜单------------*/
+        #menu_gen ul {
+            display: flex;
+        }
+
+        #menu_gen ul li {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        #menu_gen ul li p {
+            font-size: 0.32rem;
+            margin-top: 0.1rem;
+        }
+
+        #menu_gen ul li img {
+            height: 0.8rem;
+        }
+
+        /*----------菜单------------*/
+        /*----------banner start------------*/
+
+        #swiper_gen {
+            width: 90%;
+            overflow: hidden;
+            margin: 0.2rem auto;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 3rem;
+            /*padding: 0 0.2rem;*/
+        }
+
+        .swiper-slide {
+            /*margin: 0.1rem;*/
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.2rem;
+        }
+
+        /*----------banner end------------*/
+
+        /*----------guess start------------*/
+        #guess_gen {
+            width: 96%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            overflow: hidden;
+            margin: 0.2rem auto;
+        }
+
+        .goods_item {
+            flex: 49%;
+            background-color: white;
+            margin-bottom: 0.2rem;
+            border-radius: 0.2rem;
+            overflow: hidden;
+        }
+
+        .divider {
+            flex: 2%;
+        }
+
+        .goods_item img {
+            width: 100%;
+            height: 4rem;
+            vertical-align: top;
+            display: block;
+            border: 0;
+        }
+
+        .goods_name {
+            font-size: 0.32rem;
+            margin: 0.1rem;
+        }
+
+        /*----------guess end------------*/
+
+
+    </style>
+    <title>首页</title>
+</head>
+<body>
+
+<div id="app">
+
+    <div id="swiper_gen"></div>
+
+    <div id="menu_gen"></div>
+
+    <div id="guess_gen"></div>
+
+    <div id="commonNav"></div>
+    <!--给导航栏预留位置的-->
+    <div id="commonFooter"></div>
+
+
+</div>
+
+<script>
+
+    /*web准备完毕*/
+    $(document).ready(function () {
+
+        //添加底部导航栏
+        addCommonNav(0);
+
+        /**
+         * 猜你喜欢
+         */
+        getMineGuessLike(function (data) {
+            var guess_gen = document.querySelector("#guess_gen");
+            var list = data.data.data;
+            console.log("length:" + list.length);
+            for (var i = 0; i < list.length; i++) {
+                var goods = list[i];
+                var goods_item = document.createElement("div")
+                goods_item.classList.add("goods_item");
+                var goods_item_img = document.createElement("img")
+                goods_item_img.src = goods.small;
+                //添加商品图片
+                goods_item.appendChild(goods_item_img);
+                var goods_name = document.createElement("p")
+                goods_name.classList.add("goods_name");
+                goods_name.innerText = goods.name;
+                //添加商品名称
+                goods_item.appendChild(goods_name);
+
+                //添加商品item
+                guess_gen.appendChild(goods_item);
+                //添加分割线
+                if (i % 2 == 0) {
+                    var divider = document.createElement("div")
+                    divider.classList.add("divider");
+                    guess_gen.appendChild(divider);
+                }
+            }
+        });
+
+
+        /**
+         * banner
+         */
+        getBanner(function (data) {
+            var swiper_gen = document.querySelector("#swiper_gen");
+            var swiper_container = document.createElement("div")
+            var swiper_wrapper = document.createElement("div")
+            swiper_container.classList.add("swiper-container");
+            swiper_wrapper.classList.add("swiper-wrapper");
+            for (var i = 0; i < data.length; i++) {
+                var bannerItem = data[i];
+                var swiper_slide = document.createElement("div")
+                swiper_slide.classList.add("swiper-slide");
+                var swiper_slide_img = document.createElement('img');
+                swiper_slide_img.src = bannerItem.pic_url;
+                swiper_slide.appendChild(swiper_slide_img)
+                swiper_wrapper.appendChild(swiper_slide)
+            }
+            swiper_container.appendChild(swiper_wrapper)
+            swiper_gen.appendChild(swiper_container)
+        });
+
+        /**
+         * 添加菜单
+         */
+        getMenu(function (data) {
+            var menu_gen = document.querySelector("#menu_gen");
+            var menu_gen_ul = document.createElement("ul");
+            for (var i = 0; i < data.length; i++) {
+                var menu = data[i];
+                var menu_gen_ul_li = document.createElement("li");
+                var menu_gen_ul_li_img = document.createElement('img');
+                var menu_gen_ul_li_p = document.createElement('p');
+                menu_gen_ul_li_img.src = menu.image;
+                menu_gen_ul_li_p.innerText = menu.navigation_name;
+                menu_gen_ul_li.appendChild(menu_gen_ul_li_img);
+                menu_gen_ul_li.appendChild(menu_gen_ul_li_p);
+                menu_gen_ul.appendChild(menu_gen_ul_li);
+            }
+            menu_gen.appendChild(menu_gen_ul);
+        })
+
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var mySwiper = new Swiper('.swiper-container', {
+            direction: 'horizontal', // 垂直切换选项
+            loop: true, // 循环模式选项
+            autoplay: {//可选选项，自动滑动
+                delay: 3000,//1秒切换一次
+                disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+            },
+//            autoplay: true,//可选选项，自动滑动
+            preventClicks: false,//默认true
+            preventClicksPropagation: false,
+            on: {
+                click: function () {
+                },
+                autoplayStop: function () {
+
+                    console.log("关闭自动切换")
+                }
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

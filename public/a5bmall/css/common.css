@@ -1,0 +1,122 @@
+
+/*rem常用定义*/
+/*常用文字大小*/
+rem12Px{
+    font-size: 0.32rem;
+}
+rem14Px{
+    font-size: 0.373rem;
+}
+/*标题栏*/
+rem18Px{
+    font-size: 0.48rem;
+}
+/*标题栏高度*/
+rem46Px{
+    font-size: 1.227rem;
+}
+
+body {
+    max-width: 540px;
+    min-width: 320px;
+    margin: 0 auto;
+    font-family: -apple-system, Helvetica, sans-serif;
+    background: #f2f2f2;
+    line-height: 1.5;
+    color: black;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: 0;
+    font-size: 0.32rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+button {
+    border: none;
+}
+
+#loadingImg {
+    width: 2rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+/*导航栏*/
+#commonNav {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    font-size: 0.32rem;
+    border-top: 0.03rem solid lightgray;
+    background-color: white;
+}
+
+#commonNavItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.06rem 0;
+}
+
+#commonNavItem img {
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-bottom: 0.04rem;
+}
+
+/*标题栏*/
+#headBar {
+    height: 1.227rem;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: 0.027rem solid lightgray;
+}
+
+#headBar img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 70%;
+    margin: auto 0.427rem;
+    display: inline-block;
+}
+
+#headBar p {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.48rem;
+}

@@ -6,63 +6,33 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="../css/normalize.css" type="text/css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery.cookie.min.js"></script>
+    <script src="js/jroll.js"></script>
     <script src="js/a5bmall.js"></script>
+    <script src="../javascripts/flexible.js"></script>
     <script src="js/md5.js"></script>
+    <link href="css/common.css" type="text/css" rel="stylesheet">
     <style type="text/css">
-        body {
-            max-width: 540px;
-            min-width: 320px;
-            margin: 0 auto;
-            font-family: -apple-system, Helvetica, sans-serif;
-            background: white;
-            line-height: 1.5;
-            color: black;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            outline: 0;
-            font-size: 12px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        * {
-            box-sizing: border-box;
+        .gen{
+            background-color: white;
         }
 
         .bottomRed3px {
-            border-bottom: 2px solid red;
+            border-bottom: 0.027rem solid red;
             color: red;
         }
 
         .bottomTrans3px {
-            border-bottom: 2px solid transparent;
+            border-bottom: 0.027rem solid transparent;
             color: black;
-        }
-
-        .headbar_gen {
-            position: relative;
-            height: 46px;
-            line-height: 46px;
-            text-align: center;
-            padding: 0 16px;
-            font-size: 18px;
-            border-bottom: 1px solid lightgray;
-        }
-
-        .headbar_gen img {
-            position: absolute;
-            left: 16px;
-            top: 8px;
-            height: 30px;
         }
 
         .tab {
             display: flex;
             justify-content: space-around;
-            height: 40px;
-            line-height: 40px;
+            height: 1.067rem;
+            line-height: 1.067rem;
             align-items: center;
         }
 
@@ -74,46 +44,50 @@
         .userinput_gen, .passinput_gen, .imgcodeinput_gen {
             display: flex;
             justify-content: space-around;
-            height: 40px;
-            line-height: 40px;
-            border-bottom: 1px solid lightgray;
-            margin: 3px 16px;
-            margin-top: 10px;
+            height: 1.067rem;
+            line-height: 1.067rem;
+            border-bottom: 0.027rem solid lightgray;
+            margin: 0.267rem 0.427rem 0 0.427rem;
+            font-size: 0.32rem;
         }
 
         .userinput_gen input, .passinput_gen input, .imgcodeinput_gen input {
             height: 100%;
             flex: 1;
             border: none;
-            margin-left: 20px;
+            margin-left: 0.267rem;
         }
 
         .imgcodeinput_gen img {
             height: 100%;
-            padding: 3px 0;
-            width: 60px;
+            padding: 0.08rem 0;
+            width: 1.6rem;
         }
 
         #submit {
-            height: 36px;
+            height: 0.96rem;
             width: 90%;
-            margin: 30px auto;
-            line-height: 36px;
+            margin: 0.267rem auto;
+            line-height: 0.96rem;
             background-color: deepskyblue;
-            border-radius: 5px;
+            border-radius: 0.133rem;
             color: white;
             text-align: center;
-            box-shadow: 0px 3px 10px #888888;
+            box-shadow: 0rem 0.03rem 0.1rem #888888;
+            font-size: 0.32rem;
         }
     </style>
     <title>登录</title>
 </head>
 <body>
 <div class="gen">
-    <div class="headbar_gen">
-        <img src="images/ic_back.png" alt="">
-        登录
+
+    <!--标题栏-->
+    <div id="headBar">
+        <img src="images/ic_back.png" alt="" onclick="back()">
+        <p id="headBarTitle"></p>
     </div>
+
     <div class="tab">
         <div class="tab_userlogin bottomRed3px" onclick="changeLoginType(true)">
             账号登录
@@ -134,9 +108,17 @@
     </div>
     <div id="submit" onclick="submit()">登录</div>
 
+    <div style="height: 2000px"></div>
 </div>
 
 <script>
+
+    /*web准备完毕*/
+    $(document).ready(function () {
+        //设置标题栏
+        setHeadBarTitle("登录")
+    });
+
     //账号登录
     var tab_userlogin = document.querySelector('.tab_userlogin');
     //短信登录
@@ -234,22 +216,22 @@
                 getImgCode()
             },
             /*  complete: function (XMLHttpRequest, textStatus) {
-                  if (textStatus == 'success') {
+             if (textStatus == 'success') {
 
-                  }
-                  console.log("complete:" + textStatus);
-                  this; // 调用本次AJAX请求时传递的options参数
-              },*/
+             }
+             console.log("complete:" + textStatus);
+             this; // 调用本次AJAX请求时传递的options参数
+             },*/
             /*
-          {"uid":146,"username":"aoao","nickname":"aoao","access_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk2MjA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.34pe9UlJXV2AdTfexuhIpL1D18eduDqsjZY9hj6V6COF-4tFvsI4QV1me4t1LObOnN9X27RJm-NhBCWUPuIPmA","refresh_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk5ODA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.1L_b_GbDwGVaXPvU4xWCqjFSfQuVWjtE1seSsxk3AavtcseiKWiT5KiwYC0zPJyUd0gh3rSA84FgRwx-DrZTog","face":"http://47.88.173.86:82/testShopImg/20191214/D32EF223C702459EA2E4882E31BC7735.png"}
-            * */
+             {"uid":146,"username":"aoao","nickname":"aoao","access_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk2MjA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.34pe9UlJXV2AdTfexuhIpL1D18eduDqsjZY9hj6V6COF-4tFvsI4QV1me4t1LObOnN9X27RJm-NhBCWUPuIPmA","refresh_token":"eyJhbGciOiJIUzUxMiJ9.eyJzZWxmT3BlcmF0ZWQiOjAsInN1YiI6IkNMRVJLIiwicm9sZSI6IlNVUEVSX1NFTExFUiIsImZvdW5kZXIiOm51bGwsInJvbGVzIjpbIkJVWUVSIiwiU0VMTEVSIiwiQ0xFUksiXSwic2VsbGVyTmFtZSI6IuaYguaYgue-juWmhuaciemZkOWFrOWPuCIsImNsZXJrSWQiOjgwLCJ1dWlkIjpudWxsLCJjb3VudHJ5SWQiOjQsInVpZCI6MTQ2LCJzZWxsZXJJZCI6OTgsImNsZXJrTmFtZSI6ImFvYW8iLCJleHAiOjE1ODk5ODA4NTgsInVzZXJuYW1lIjoiYW9hbyJ9.1L_b_GbDwGVaXPvU4xWCqjFSfQuVWjtE1seSsxk3AavtcseiKWiT5KiwYC0zPJyUd0gh3rSA84FgRwx-DrZTog","face":"http://47.88.173.86:82/testShopImg/20191214/D32EF223C702459EA2E4882E31BC7735.png"}
+             * */
             success: function (data, textStatus) {
 //                alert("登陆成功:" + data.username)
                 $.cookie('a5bmall_token', data.access_token, {expires: 7, path: '/'});
                 Toast("登陆成功:" + data.username, 300, function () {
                     getUserInfo(function (user) {
                         $.cookie('a5bmall_user', JSON.stringify(user), {expires: 7, path: '/'});
-                        window.location.href = "main.html";
+                        window.location.href = "main_mine.html";
                     });
                 });
 

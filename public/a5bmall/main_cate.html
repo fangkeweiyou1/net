@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../jquery/jquery.js"></script>
+    <script src="js/a5bmall.js"></script>
+    <script src="../javascripts/flexible.js"></script>
+    <link href="../css/normalize.css" type="text/css" rel="stylesheet">
+    <link href="css/common.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+
+        #app_content_gen{
+            display: flex;
+            width: 100%;
+        }
+        #left{
+            flex: 3;
+            /*background-color: green;*/
+            /*height: 1000px;*/
+        }
+        #left ul li,#right ul li{
+            height: 500px;
+        }
+        #left ul li:nth-child(1){
+            background-color: red;
+        }
+        #left ul li:nth-child(2){
+            background-color: green;
+        }
+        #left ul li:nth-child(3){
+            background-color: blue;
+        }
+        #right{
+            flex: 7;
+            /*background-color: red;*/
+            /*height: 1000px;*/
+        }
+        #right ul li:nth-child(1){
+            background-color: pink;
+        }
+        #right ul li:nth-child(2){
+            background-color: red;
+        }
+        #right ul li:nth-child(3){
+            background-color: green;
+        }
+
+
+
+
+    </style>
+    <title>分类</title>
+</head>
+<body>
+    <div id="app">
+        <div id="app_content_gen">
+            <div id="left">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div id="right">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="commonNav"></div>
+        <!--给导航栏预留位置的-->
+        <div id="commonFooter"></div>
+    </div>
+
+   <script>
+       /*web准备完毕*/
+       $(document).ready(function () {
+           //添加底部导航栏
+           addCommonNav(1);
+       });
+   </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <!--
+    强制让文档的宽度与设备的宽度保持1:1，并且文档最大的宽度比例是1.0，且不允许用户点击屏幕放大浏览。
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+1
+WebApp全屏模式 隐藏地址栏。
+<meta name="apple-mobile-web-app-capable" content="yes" />
+1
+禁止百度转码显示。
+<meta http-equiv="Cache-Control" content="no-siteapp">
+1
+制定iphone中safari顶端的状态条的样式（default:白色，black:黑色，black-translucent：半透明）
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+1
+添加到IOS主屏后的标题。
+<meta name="apple-mobile-web-app-title" content="标题名称">
+    -->
+    <!--todo 京东布局标准写法-->
+    <!--todo 1px不一定是物理中的1px,可能是2px-->
+    <!--todo 使用CSS3的盒子 box-sizing: border-box;-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        a{
+            /*todo 移除点击高亮*/
+            -webkit-tag-highlight-color:transparent;
+            /*TODO 在移动端浏览器默认的外观在IOS上使用自定义输入框样式*/
+            -webkit-appearance: none;
+
+        }
+        img,a{
+            /*todo 禁用长按页面时的弹出菜单*/
+            -webkit-touch-callout: none;
+        }
+        /*TODO 限制body宽最大最小,并居中*/
+        body{
+            width: 100%;
+            min-width: 320px;
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 14px;
+            font-family: -apple-system,Helvetica,sans-serif;
+            color: #666666;
+            line-height: 1.5;
+            /*TODO X轴超出不允许显示*/
+            overflow-x: hidden;
+        }
+    </style>
+    <title>移动端布局</title>
+</head>
+<body>
+<div class="content" style="width: 100%;height: 300px;background-color: purple;padding: 20px;border: 10px solid red;color: white">移动端布局</div>
+
+</body>
+</html>

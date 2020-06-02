@@ -1,0 +1,8 @@
+关闭nginx的三种办法
+nginx -s quit
+nginx -s stop
+taskkill /f /t /im nginx.exe
+打开nginx的集中办法
+双击.exe
+nginx.exe
+start nginx

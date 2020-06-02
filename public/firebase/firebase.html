@@ -49,18 +49,20 @@
         var data2 = {
             data: {
                 msgid: "-1",
-                title: "hello",
-                body: "hello",
-                smallImageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578054903253&di=6c578832e813f208dba94b36c8b902a5&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201602%2F19%2F20160219142234_LjcWC.png",
-                bigImageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578054903253&di=6c578832e813f208dba94b36c8b902a5&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201602%2F19%2F20160219142234_LjcWC.png",
+                title: "这里是标题",
+                body: "这里是内容",
+                smallImageUrl: "http://img3.imgtn.bdimg.com/it/u=3493978666,3694725441&fm=26&gp=0.jpg",//这里是默认视图中右边图片
+                bigImageUrl: "http://img2.imgtn.bdimg.com/it/u=2824288391,1580212003&fm=26&gp=0.jpg",//这里是扩展视图中的图片
+                //注意:扩展文字和扩展视图只允许一个
+                extendBody:"这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本",
                 url: "asia5b://www.asia5b.com/inbox?id=0"
             },
-            notification: {
-                "body": "This is an FCM notification that displays an image.!",
-                "title": "FCM Notification",
-                "image": "http://image.biaobaiju.com/uploads/20181007/20/1538913958-KLFbqPSovh.jpg",
-                "sound": "default"
-            },
+//            notification: {
+//                "body": "This is an FCM notification that displays an image.!",
+//                "title": "FCM Notification",
+//                "image": "http://image.biaobaiju.com/uploads/20181007/20/1538913958-KLFbqPSovh.jpg",
+//                "sound": "default"
+//            },
             apns: {
                 "payload": {
                     "aps": {
@@ -72,7 +74,9 @@
                 }
             },
 //            to: "eqw-gS28mLE:APA91bHybeOJlJd8G55OoC7NlYLlw2QxI-0nxT3Hw9LRXuJdvnlymf1SXfo7de8tP_A5VpbL-BVJYPvhKm3TguWtE10Ue-RsVPpQ5fEZbOEFkDbk1EJQNImJOi-2i4PE56MMw1LEpn8b"
-            to: "eyP2IP9oUSo:APA91bGPSc1-TIEne6Zv3ick7F2lR9vo0LO4kBA-zkIreP0AEnG8wrNKRE3MpD83G-DlVmIqZQQJCgITgqpw8qodZC7gx1gMxAEpsR1D1J3nPmM_OlYap7pEUn3tCHElsamCjAo6YVrL"
+//            to: "eyP2IP9oUSo:APA91bGPSc1-TIEne6Zv3ick7F2lR9vo0LO4kBA-zkIreP0AEnG8wrNKRE3MpD83G-DlVmIqZQQJCgITgqpw8qodZC7gx1gMxAEpsR1D1J3nPmM_OlYap7pEUn3tCHElsamCjAo6YVrL"
+//            to: "cRkAC-P7StM:APA91bHagRrExtcL3HMoog6k4cTi8PDRvxbmhMVD64UphpdadHBUshGFrPASzHsuMuvJaNa1zGrgTOpZjCPzpr_fo5A5dH2ovxedSkQBuMckNiRrJFcnOKp5WAGVPklVtH8LvX1FaSWl"
+            to: "edVVE4JALts:APA91bFqXWAkC3ksyqxHS4Rtp-A4zWfLSqqjZHm6pdOxUOTQEXPbEclvZP1qT6z01QajjAx_KHP5Pe1wVmlSTdffJjh7tKeTKjdkBqmWbVL8sERWW7YNP4OHCjT3RGbmsIGwqssgk7k2"
 
         };
         $.ajax({

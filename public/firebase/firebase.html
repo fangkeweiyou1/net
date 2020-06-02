@@ -5,90 +5,229 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="../jquery/jquery.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="index.css">-->
     <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        button {
+            border: none;
+        }
+
+        body {
+            background: #f9f9f9;
+        }
+
+        h2 {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .divider {
+            height: 3px;
+            background: deepskyblue;
+            margin-bottom: 30px;
+        }
+
         #app {
-            width: 800px;
-            margin: 100px auto;
+            width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item {
+            display: flex;
+            height: 50px;
+            width: 100%;
+            border: 1px solid lightgray;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .item_name {
+            width: 100%;
+            flex: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+
+        }
+
+        .item_value {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .item_value input {
+            height: 40px;
+            width: 100%;
+            border: none;
+            background-color: white;
+            padding: 0 10px;
+        }
+
+        #send {
+            width: 100%;
+            height: 50px;
+            color: white;
+            background-color: deepskyblue;
+            margin-bottom: 100px;
+        }
+
+        .checkbox {
+            zoom: 180%;;
         }
     </style>
     <title>firebase</title>
 </head>
 <body>
+
+<h2>firebase推送</h2>
+
+<hr class="divider">
+
 <div id="app">
-    <div style="border: 1px solid red;display: none">
-        <label><input type="checkbox">notification</label>
+
+    <div class="item">
+        <div class="item_name">
+            TO
+        </div>
+        <div class="item_value">
+            <input id="to" type="text"
+                   value="edVVE4JALts:APA91bFqXWAkC3ksyqxHS4Rtp-A4zWfLSqqjZHm6pdOxUOTQEXPbEclvZP1qT6z01QajjAx_KHP5Pe1wVmlSTdffJjh7tKeTKjdkBqmWbVL8sERWW7YNP4OHCjT3RGbmsIGwqssgk7k2">
+        </div>
     </div>
 
-    <br/>
+    <div class="item">
+        <div class="item_name">
+            title
+        </div>
+        <div class="item_value">
+            <input id="title" type="text" value="这里是标题">
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="item_name">
+            body
+        </div>
+        <div class="item_value">
+            <input id="body" type="text" value="这里是内容">
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="item_name">
+            extendBody
+        </div>
+        <div class="item_value">
+            <input id="extendBody" type="text" value="这里是扩展内容">
+        </div>
+
+        <input id="extendBody_check" type="checkbox" class="checkbox">
+    </div>
+
+    <div class="item">
+        <div class="item_name">
+            smallImageUrl
+        </div>
+        <div class="item_value">
+            <input id="smallImageUrl" type="text"
+                   value="http://img3.imgtn.bdimg.com/it/u=3493978666,3694725441&fm=26&gp=0.jpg">
+        </div>
+
+        <input id="smallImageUrl_check" type="checkbox" class="checkbox">
+    </div>
+
+    <div class="item">
+        <div class="item_name">
+            bigImageUrl
+        </div>
+        <div class="item_value">
+            <input id="bigImageUrl" type="text"
+                   value="http://img2.imgtn.bdimg.com/it/u=2824288391,1580212003&fm=26&gp=0.jpg">
+        </div>
+
+        <input id="bigImageUrl_check" type="checkbox" class="checkbox">
+    </div>
+
+    <div class="item">
+        <div class="item_name">
+            url
+        </div>
+        <div class="item_value">
+            <input id="url" type="text" value="asia5b://www.asia5b.com/inbox?id=0">
+        </div>
+    </div>
+
 
     <button id="send" onclick="send()">发送消息</button>
 </div>
 <script>
     function send() {
-        console.log("发送");
-        var data3 = {
-            "message": {
-                "token": "eyP2IP9oUSo:APA91bGPSc1-TIEne6Zv3ick7F2lR9vo0LO4kBA-zkIreP0AEnG8wrNKRE3MpD83G-DlVmIqZQQJCgITgqpw8qodZC7gx1gMxAEpsR1D1J3nPmM_OlYap7pEUn3tCHElsamCjAo6YVrL",
-                "notification": {
-                    "body": "This is an FCM notification that displays an image.!",
-                    "title": "FCM Notification",
-                },
-                "apns": {
-                    "payload": {
-                        "aps": {
-                            "mutable-content": 1
-                        }
-                    },
-                    "fcm_options": {
-                        "image": "http://image.biaobaiju.com/uploads/20181007/20/1538913958-KLFbqPSovh.jpg"
-                    }
-                }
-            }
+        //todo 扩展内容和扩展视图互斥
+        var to = document.querySelector("#to").value;
+        if (false) {
+            //todo 在这里固定写死to也可以
+            to="";
+        }
+        var title = document.querySelector("#title").value;
+        var body = document.querySelector("#body").value;
+        var extendBody = document.querySelector("#extendBody").value;
+        var extendBody_check = document.querySelector("#extendBody_check").checked;
+        if (!extendBody_check) {
+            extendBody = null;
+        }
+        var smallImageUrl = document.querySelector("#smallImageUrl").value;
+        var smallImageUrl_check = document.querySelector("#smallImageUrl_check").checked;
+        if (!smallImageUrl_check) {
+            smallImageUrl = null;
+        }
+        var bigImageUrl = document.querySelector("#bigImageUrl").value;
+        var bigImageUrl_check = document.querySelector("#bigImageUrl_check").checked;
+        if (!bigImageUrl_check) {
+            bigImageUrl = null;
+        }
+        var url = document.querySelector("#url").value;
+        var pushBean = {
+            title: title,
+            body: body,
+            extendBody: extendBody,
+            smallImageUrl: smallImageUrl,
+            bigImageUrl: bigImageUrl,
+            url: url,
         };
-        var data2 = {
-            data: {
-                msgid: "-1",
-                title: "这里是标题",
-                body: "这里是内容",
-                smallImageUrl: "http://img3.imgtn.bdimg.com/it/u=3493978666,3694725441&fm=26&gp=0.jpg",//这里是默认视图中右边图片
-                bigImageUrl: "http://img2.imgtn.bdimg.com/it/u=2824288391,1580212003&fm=26&gp=0.jpg",//这里是扩展视图中的图片
-                //注意:扩展文字和扩展视图只允许一个
-                extendBody:"这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本这里是扩展文本",
-                url: "asia5b://www.asia5b.com/inbox?id=0"
-            },
-//            notification: {
-//                "body": "This is an FCM notification that displays an image.!",
-//                "title": "FCM Notification",
-//                "image": "http://image.biaobaiju.com/uploads/20181007/20/1538913958-KLFbqPSovh.jpg",
-//                "sound": "default"
-//            },
-            apns: {
-                "payload": {
-                    "aps": {
-                        "mutable-content": 1
-                    }
-                },
-                "fcm_options": {
-                    "image": "http://image.biaobaiju.com/uploads/20181007/20/1538913958-KLFbqPSovh.jpg"
-                }
-            },
-//            to: "eqw-gS28mLE:APA91bHybeOJlJd8G55OoC7NlYLlw2QxI-0nxT3Hw9LRXuJdvnlymf1SXfo7de8tP_A5VpbL-BVJYPvhKm3TguWtE10Ue-RsVPpQ5fEZbOEFkDbk1EJQNImJOi-2i4PE56MMw1LEpn8b"
-//            to: "eyP2IP9oUSo:APA91bGPSc1-TIEne6Zv3ick7F2lR9vo0LO4kBA-zkIreP0AEnG8wrNKRE3MpD83G-DlVmIqZQQJCgITgqpw8qodZC7gx1gMxAEpsR1D1J3nPmM_OlYap7pEUn3tCHElsamCjAo6YVrL"
-//            to: "cRkAC-P7StM:APA91bHagRrExtcL3HMoog6k4cTi8PDRvxbmhMVD64UphpdadHBUshGFrPASzHsuMuvJaNa1zGrgTOpZjCPzpr_fo5A5dH2ovxedSkQBuMckNiRrJFcnOKp5WAGVPklVtH8LvX1FaSWl"
-            to: "edVVE4JALts:APA91bFqXWAkC3ksyqxHS4Rtp-A4zWfLSqqjZHm6pdOxUOTQEXPbEclvZP1qT6z01QajjAx_KHP5Pe1wVmlSTdffJjh7tKeTKjdkBqmWbVL8sERWW7YNP4OHCjT3RGbmsIGwqssgk7k2"
+
+
+        console.log("发送");
+        var data = {
+            data: pushBean,
+            to: to
 
         };
+        console.log(data);
         $.ajax({
             type: 'post',
-//            url: 'https://fcm.googleapis.com/v1/projects/myproject-asia5b-test/messages:send',
             url: 'https://fcm.googleapis.com/fcm/send',
             contentType: 'application/json',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "key=AAAAJKSFILQ:APA91bG5-xvZJIJ2RwHLu9IBDsr-k3rI4d4Zo16gzeAc9rhDEZkWHfOYw93cqsYnRBVYl_BCXUpUBQIp5TNe-8EF-VMlCGqckMK8jQuw1pjXN801BnYUrBqrW_gt-0TkZHbEA2AM1M8_");
-//                xhr.setRequestHeader("Authorization", "Bearer AAAAJKSFILQ:APA91bG5-xvZJIJ2RwHLu9IBDsr-k3rI4d4Zo16gzeAc9rhDEZkWHfOYw93cqsYnRBVYl_BCXUpUBQIp5TNe-8EF-VMlCGqckMK8jQuw1pjXN801BnYUrBqrW_gt-0TkZHbEA2AM1M8_");
             },
-            data: JSON.stringify(data2),
+            data: JSON.stringify(data),
             dataType: 'json',
             success: function (data) {
                 console.log("成功:" + data)

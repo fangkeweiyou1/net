@@ -42,6 +42,14 @@ app.use('/users', usersRouter);
 //todo
 //todo
 
+app.get('/download', function (req, res) {
+    res.sendFile(__dirname + "/" + "/public/download.html");
+});
+
+app.get('/firebase', function (req, res) {
+    res.sendFile(__dirname + "/" + "/public/firebase/firebase.html");
+});
+
 /**
  * todo 读取文件目录
  */
@@ -176,7 +184,7 @@ app.get('/other', function (req, res) {
     })
 });
 
-app.listen(8000);
+app.listen(80);
 
 console.log('服务器启动成功');
 

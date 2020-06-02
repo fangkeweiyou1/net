@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <style type="text/css">
+        #app {
+            width: 800px;
+            margin: 100px auto;
+        }
+    </style>
+    <title>firebase-ios</title>
+</head>
+<body>
+<div id="app">
+
+    <button id="send" onclick="send()">发送消息</button>
+</div>
+<script>
+    function send() {
+        console.log("发送");
+        var data = {
+            "message": {
+                "token": "eyP2IP9oUSo:APA91bGPSc1-TIEne6Zv3ick7F2lR9vo0LO4kBA-zkIreP0AEnG8wrNKRE3MpD83G-DlVmIqZQQJCgITgqpw8qodZC7gx1gMxAEpsR1D1J3nPmM_OlYap7pEUn3tCHElsamCjAo6YVrL",
+                "notification": {
+                    "body": "This is an FCM notification that displays an image.!",
+                    "title": "FCM Notification",
+                },
+                "apns": {
+                    "payload": {
+                        "aps": {
+                            "mutable-content": 1
+                        }
+                    },
+                    "fcm_options": {
+                        "image": "http://image.biaobaiju.com/uploads/20181007/20/1538913958-KLFbqPSovh.jpg"
+                    }
+                }
+            }
+        };
+        $.ajax({
+            type: 'post',
+            url: 'https://fcm.googleapis.com/fcm/send',
+            contentType: 'application/json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "key=AAAAJKSFILQ:APA91bG5-xvZJIJ2RwHLu9IBDsr-k3rI4d4Zo16gzeAc9rhDEZkWHfOYw93cqsYnRBVYl_BCXUpUBQIp5TNe-8EF-VMlCGqckMK8jQuw1pjXN801BnYUrBqrW_gt-0TkZHbEA2AM1M8_");
+            },
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (data) {
+                console.log("成功:" + data)
+            }
+        });
+        console.log("发送2")
+    }
+</script>
+
+</body>
+</html>

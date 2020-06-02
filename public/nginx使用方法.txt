@@ -6,3 +6,5 @@ taskkill /f /t /im nginx.exe
 双击.exe
 nginx.exe
 start nginx
+重启nginx
+nginx -s reload

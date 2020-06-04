@@ -42,8 +42,18 @@ app.use('/users', usersRouter);
 //todo
 //todo
 
+/*todo 查看cookie start*/
+app.get('/', function(req, res) {
+    console.log("Cookies: " + util.inspect(req.cookies));
+})
+/*todo 查看cookie end*/
+
 app.get('/download', function (req, res) {
     res.sendFile(__dirname + "/" + "/public/download.html");
+});
+
+app.get('/applist', function (req, res) {
+    res.sendFile(__dirname + "/" + "/public/applist.html");
 });
 
 app.get('/firebase', function (req, res) {
@@ -182,6 +192,13 @@ app.get('/other', function (req, res) {
             res.send('error');
         }
     })
+});
+
+var server = app.listen(80, function () {
+    var host = server.address().address
+    var port = server.address().port
+
+    console.log("应用实例，访问地址为 http://%s:%s", host, port)
 });
 
 // app.listen(80);

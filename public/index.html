@@ -5,240 +5,39 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script src="javascripts/utils.js"></script>
-    <script>
-    </script>
     <style type="text/css">
-        .applist li img {
-            width: 50px;
-            margin-right: 20px;
-        }
 
-        .applist li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
 
-        .links {
-            display: flex;
-            flex-direction: column;
-            margin-left: 20px;
-            align-items: center;
-        }
 
-        .links a:nth-child(n+2) {
-            /*margin-top: 10px;*/
-        }
-
-        /*a  upload */
-        .a-upload {
-            /*padding: 4px 10px;*/
-            height: 30px;
-            line-height: 30px;
-            position: relative;
-            cursor: pointer;
-            color: #888;
-            background: #fafafa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            overflow: hidden;
-            display: inline-block;
-            *display: inline;
-            *zoom: 1;
-            margin-left: 10px;
-        }
-
-        .a-upload input {
+        p {
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
             position: absolute;
-            font-size: 100px;
-            right: 0;
+            left: 0;
             top: 0;
-            opacity: 0;
-            filter: alpha(opacity=0);
-            cursor: pointer
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            text-align: center;
+            font-size: 100px;
+            padding-bottom: 80px;
         }
-
-        .a-upload:hover {
-            color: #444;
-            background: #eee;
-            border-color: #ccc;
-            text-decoration: none
+        footer{
+            width: 100%;
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
         }
     </style>
-    <title>武时亿安卓APP列表</title>
+    <title>方可为友</title>
 </head>
 <body>
 
-<ul class="applist">
-    <li>
-        <img src="images/ic_wms_launcher.png">
+<p>志同道合者方可为友</p>
 
-        <div>武时亿WMS</div>
-
-        <div class="links">
-            <span style="display: flex;align-items: center">
-                <a href="download.html?type=wms">测试</a>
-                 <a href="javascript:;" class="a-upload">
-        <input type="file" name="" id="" onchange="uploadFileService(this,'wms')">上传最新文件
-                </a>
-            </span>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_asia_launcher.png">
-
-        <div>武时亿商城</div>
-
-        <div class="links">
-            <a href="download.html?type=shop_cn">测试</a>
-            <a href="download.html?type=shop_com">正式</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_asia_launcher.png">
-
-        <div>武时亿集运</div>
-
-        <div class="links">
-            <a href="download.html?type=jy_cn">测试</a>
-            <a href="download.html?type=jy_com">正式</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_asia_launcher.png">
-
-        <div>武时亿新代购</div>
-
-        <div class="links">
-            <a href="download.html?type=newasia5b_cn">测试</a>
-            <a href="download.html?type=newasia5b_com">正式</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_live_launcher.png">
-
-        <div>武时亿直播</div>
-
-        <div class="links">
-            <a href="download.html?type=live_cn">测试</a>
-            <a href="download.html?type=live_com">正式</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_asia_launcher.png">
-
-        <div>武时亿支付</div>
-
-        <div class="links">
-            <a href="download.html?type=pay_cn">测试</a>
-            <a href="download.html?type=pay_com">正式</a>
-        </div>
-    </li>
-
-    <li>
-        <img src="images/ic_files.png">
-
-        <div>其他文件</div>
-
-        <div class="links">
-            <a href="download.html?type=other">进入</a>
-        </div>
-    </li>
-
-    <li>
-        <img src="images/ic_others.png">
-
-        <div>使用firebase推送消息</div>
-
-        <div class="links">
-            <a href="firebase/firebase.html">进入</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_others.png">
-
-        <div>新代购吊起第三方APP</div>
-
-        <div class="links">
-            <a href="newasia5b/asia5b_third.html">进入</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_others.png">
-
-        <div>并发测试</div>
-
-        <div class="links">
-            <a href="testasiaapi.html">进入</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_others.png">
-
-        <div>测试清除webview缓存</div>
-
-        <div class="links">
-            <a href="testclearwebview.html">进入</a>
-        </div>
-    </li>
-
-    <li>
-        <img src="images/ic_others.png">
-
-        <div>代购版本更新管理</div>
-
-        <div class="links">
-            <a href="newasia5b/asia5b_update.html">进入</a>
-        </div>
-    </li>
-    <li>
-        <img src="images/ic_others.png">
-
-        <div onclick="printLocalIp()">A5BMALL</div>
-
-        <div class="links">
-            <a href="a5bmall/main_mine.html">进入</a>
-        </div>
-    </li>
-
-
-</ul>
-</div>
-<script>
-
-    function uploadFileService(input, type) {
-        console.log(input.files[0]);
-        var formData = new FormData();
-        formData.append("image", input.files[0]);
-        formData.append("service", 'App.Passion.UploadFile');
-        $.ajax({
-            url: getLocalIpAll() + "uploadFile" + "/" + type,
-            type: 'post',
-            data: formData,
-            //todo 表示接收格式
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                console.log(JSON.stringify(res));
-                var resultModel=JSON.parse(JSON.stringify(res));
-                console.log(resultModel.message)
-//                alert((JSON.parse(JSON.stringify(res))).message);
-            }
-        })
-    }
-</script>
-
+<footer>
+    网站备案/许可证号  鄂ICP备20008359号-1
+</footer>
 </body>
-
 </html>

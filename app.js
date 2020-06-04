@@ -13,7 +13,7 @@ var request = require('request');
 var cors = require('cors');
 
 //根url
-var genUrl = "";
+var genUrl = "http://www.fangkeweiyou.com/";
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -155,7 +155,7 @@ app.get('/readDir', function (req, res) {
         default:
             break;
     }
-
+    resData.appIconUrl=genUrl+resData.appIconUrl;
 
     var queryPath = path.join(__dirname, 'public/files', dirPath)
     fs.readdir(queryPath, function (err, files) {
@@ -235,7 +235,6 @@ app.get('/other', function (req, res) {
 var server = app.listen(80, function () {
     var host = server.address().address
     var port = server.address().port
-    genUrl = "http://" + host + ":" + port;
     console.log("应用实例，访问地址为 http://%s:%s", host, port)
 });
 

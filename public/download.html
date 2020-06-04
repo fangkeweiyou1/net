@@ -50,6 +50,7 @@
 <div class="app">
     <img alt="" id="logo">
     <h3 id="appname"></h3>
+    <a id="appFile" href="#">1</a>
 </div>
 
 <img class="ic_fir_left" src="images/ic_fir_left.png" alt="">
@@ -65,110 +66,32 @@
         var logo = document.getElementById('logo');
         //标题
         var appname = document.getElementById('appname');
+        //app下载路径
+        var appFile = document.getElementById('appFile');
 
         var requset = GetRequest();
 
         var type = requset.type
 
+        $.get('/readDir?type=' + type, function (resData, status) {
 
+            //app名称
+            appname.innerText = resData.appName;
 
+            //applogo
+            logo.src = resData.appIconUrl;
 
-        switch (type) {
-            case 'wms': {
-                logo.src = 'images/ic_wms_launcher.png'
-                appname.innerText = '武时亿WMS';
-                document.title = '武时亿WMS';
+            //app下载文件路径
+            if (resData.appFiles.length > 0) {
+                var file = resData.appFiles[0];
+                appFile.innerText = file.filename;
+                appFile.href = file.filepath;
             }
-                break;
-            case 'newasia5b_cn': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿新代购';
-                document.title = '武时亿新代购';
-            }
-                break;
-            case 'newasia5b_com': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿新代购';
-                document.title = '武时亿新代购';
-            }
-                break;
-            case 'jy_cn': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿集运';
-                document.title = '武时亿集运';
-            }
-                break;
-            case 'jy_com': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿集运';
-                document.title = '武时亿集运';
-            }
-                break;
-            case 'shop_cn': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿商城';
-                document.title = '武时亿商城';
-            }
-                break;
-            case 'shop_com': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿商城';
-                document.title = '武时亿商城';
-            }
-                break;
-            case 'pay_cn': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿支付';
-                document.title = '武时亿支付';
-            }
-                break;
-            case 'pay_com': {
-                logo.src = 'images/ic_asia_launcher.png'
-                appname.innerText = '武时亿支付';
-                document.title = '武时亿支付';
-            }
-                break;
-            case 'live_cn': {
-                logo.src = 'images/ic_live_launcher.png'
-                appname.innerText = '武时亿直播';
-                document.title = '武时亿直播';
-            }
-                break;
-            case 'live_com': {
-                logo.src = 'images/ic_live_launcher.png'
-                appname.innerText = '武时亿直播';
-                document.title = '武时亿直播';
-            }
-                break;
-            case 'other':
-                logo.src = 'images/ic_files.png'
-                appname.innerText = '文件夹';
-                document.title = '文件夹';
-                break;
-            default:
-                break;
-        }
 
-
-        $.get('/readDir?type=' + type, function (data, status) {
-            console.log(data)
-            var parent = $('.app').get(0);
-            data.forEach(function (file) {
-                var a = document.createElement('a');
-                a.innerText = file.filename;
-                a.href = file.filepath;
-                parent.appendChild(a)
-            });
+            console.log(resData)
         })
 
     });
-
-
-
-
-
-
-
 
 
 </script>

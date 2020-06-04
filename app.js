@@ -43,14 +43,14 @@ app.use('/users', usersRouter);
 //todo
 
 /*todo 查看cookie start*/
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     console.log("Cookies: " + util.inspect(req.cookies));
 })
 /*todo 查看cookie end*/
 
 app.get('/meinv/*', function (req, res) {
     console.log(req.params);
-    res.sendFile(__dirname + "/" + "/public/images/linyuner_"+req.params[0]+".jpg");
+    res.sendFile(__dirname + "/" + "/public/images/linyuner_" + req.params[0] + ".jpg");
 });
 
 app.get('/download', function (req, res) {
@@ -69,56 +69,85 @@ app.get('/firebase', function (req, res) {
  * todo 读取文件目录
  */
 app.get('/readDir', function (req, res) {
+    var resData = {
+        appFiles: [],
+        appName: "",
+        appIconUrl: "",
+    };
     var params = req.query
     console.log('打印参数:' + params.type)
-    var dirPath = "files/";
+    var dirPath = "";
     switch (params.type) {
         case 'wms': {
-            dirPath = dirPath + "wms"
+            dirPath = "wms";
+            resData.appName="武时亿WMS";
+            resData.appIconUrl="/images/ic_wms_launcher.png";
         }
             break;
         case 'newasia5b_cn': {
-            dirPath = dirPath + "newasia5b/cn"
+            dirPath = "newasia5b/cn";
+            resData.appName="武时亿新代购";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'newasia5b_com': {
-            dirPath = dirPath + "newasia5b/com"
+            dirPath = "newasia5b/com";
+            resData.appName="武时亿新代购";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'jy_cn': {
-            dirPath = dirPath + "jy/com"
+            dirPath = "jy/cn";
+            resData.appName="武时亿集运";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'jy_com': {
-            dirPath = dirPath + "jy/com"
+            dirPath = "jy/com";
+            resData.appName="武时亿集运";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'shop_cn': {
-            dirPath = dirPath + "shop/cn"
+            dirPath = "shop/cn";
+            resData.appName="武时亿商城";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'shop_com': {
-            dirPath = dirPath + "shop/com"
+            dirPath = "shop/com";
+            resData.appName="武时亿商城";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'pay_cn': {
-            dirPath = dirPath + "pay/cn"
+            dirPath = "pay/cn";
+            resData.appName="武时亿支付";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'pay_com': {
-            dirPath = dirPath + "pay/com"
+            dirPath = "pay/com";
+            resData.appName="武时亿支付";
+            resData.appIconUrl="/images/ic_asia_launcher.png";
         }
             break;
         case 'live_cn': {
-            dirPath = dirPath + "live/cn"
+            dirPath = "live/cn";
+            resData.appName="武时亿直播";
+            resData.appIconUrl="/images/ic_live_launcher.png";
         }
             break;
         case 'live_com': {
-            dirPath = dirPath + "live/com"
+            dirPath = "live/com";
+            resData.appName="武时亿直播";
+            resData.appIconUrl="/images/ic_live_launcher.png";
         }
             break;
         case 'other':
-            dirPath = dirPath + "other"
+            dirPath = "other";
+            resData.appName="文件夹";
+            resData.appIconUrl="/images/ic_files.png";
             break;
 
         default:
@@ -126,7 +155,8 @@ app.get('/readDir', function (req, res) {
     }
 
 
-    var queryPath = path.join(__dirname, 'public', dirPath)
+
+    var queryPath = path.join(__dirname, 'public/files', dirPath)
     fs.readdir(queryPath, function (err, files) {
         if (err) {
             res.send(err);
@@ -135,14 +165,16 @@ app.get('/readDir', function (req, res) {
         console.log("文件数量:" + files.length);
         var resultFiles = [];
         files.forEach(function (file) {
+            console.log("文件名称:" + file);
             var fileBean = {
                 filename: file,
-                filepath: "http://" + req.headers.host + "/" + dirPath + '/' + file
+                // filepath: "http://" + req.headers.host + "/" + dirPath + '/' + file
+                filepath: "/files/"+dirPath+"/"+file
             }
             resultFiles.push(fileBean);
-            console.log("文件名称:" + file);
         });
-        res.send(resultFiles)
+        resData.appFiles=resultFiles;
+        res.send(resData)
     });
 });
 

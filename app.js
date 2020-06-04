@@ -67,6 +67,10 @@ app.get('/firebase', function (req, res) {
     res.sendFile(__dirname + "/" + "/public/firebase/firebase.html");
 });
 
+app.get("/test", function (req, res) {
+    res.send('hello world!!');
+});
+
 /**
  * todo 读取文件目录
  */
@@ -155,7 +159,7 @@ app.get('/readDir', function (req, res) {
         default:
             break;
     }
-    resData.appIconUrl=genUrl+resData.appIconUrl;
+    resData.appIconUrl = genUrl + resData.appIconUrl;
 
     var queryPath = path.join(__dirname, 'public/files', dirPath)
     fs.readdir(queryPath, function (err, files) {
@@ -170,7 +174,7 @@ app.get('/readDir', function (req, res) {
             var fileBean = {
                 filename: file,
                 // filepath: "http://" + req.headers.host + "/" + dirPath + '/' + file
-                filepath: genUrl+"/files/" + dirPath + "/" + file
+                filepath: genUrl + "/files/" + dirPath + "/" + file
             }
             resultFiles.push(fileBean);
         });

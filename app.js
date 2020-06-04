@@ -12,6 +12,8 @@ var request = require('request');
 //解决跨域
 var cors = require('cors');
 
+//根url
+var genUrl = "";
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -80,80 +82,79 @@ app.get('/readDir', function (req, res) {
     switch (params.type) {
         case 'wms': {
             dirPath = "wms";
-            resData.appName="武时亿WMS";
-            resData.appIconUrl="/images/ic_wms_launcher.png";
+            resData.appName = "武时亿WMS";
+            resData.appIconUrl = "/images/ic_wms_launcher.png";
         }
             break;
         case 'newasia5b_cn': {
             dirPath = "newasia5b/cn";
-            resData.appName="武时亿新代购";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿新代购";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'newasia5b_com': {
             dirPath = "newasia5b/com";
-            resData.appName="武时亿新代购";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿新代购";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'jy_cn': {
             dirPath = "jy/cn";
-            resData.appName="武时亿集运";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿集运";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'jy_com': {
             dirPath = "jy/com";
-            resData.appName="武时亿集运";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿集运";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'shop_cn': {
             dirPath = "shop/cn";
-            resData.appName="武时亿商城";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿商城";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'shop_com': {
             dirPath = "shop/com";
-            resData.appName="武时亿商城";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿商城";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'pay_cn': {
             dirPath = "pay/cn";
-            resData.appName="武时亿支付";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿支付";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'pay_com': {
             dirPath = "pay/com";
-            resData.appName="武时亿支付";
-            resData.appIconUrl="/images/ic_asia_launcher.png";
+            resData.appName = "武时亿支付";
+            resData.appIconUrl = "/images/ic_asia_launcher.png";
         }
             break;
         case 'live_cn': {
             dirPath = "live/cn";
-            resData.appName="武时亿直播";
-            resData.appIconUrl="/images/ic_live_launcher.png";
+            resData.appName = "武时亿直播";
+            resData.appIconUrl = "/images/ic_live_launcher.png";
         }
             break;
         case 'live_com': {
             dirPath = "live/com";
-            resData.appName="武时亿直播";
-            resData.appIconUrl="/images/ic_live_launcher.png";
+            resData.appName = "武时亿直播";
+            resData.appIconUrl = "/images/ic_live_launcher.png";
         }
             break;
         case 'other':
             dirPath = "other";
-            resData.appName="文件夹";
-            resData.appIconUrl="/images/ic_files.png";
+            resData.appName = "文件夹";
+            resData.appIconUrl = "/images/ic_files.png";
             break;
 
         default:
             break;
     }
-
 
 
     var queryPath = path.join(__dirname, 'public/files', dirPath)
@@ -169,11 +170,11 @@ app.get('/readDir', function (req, res) {
             var fileBean = {
                 filename: file,
                 // filepath: "http://" + req.headers.host + "/" + dirPath + '/' + file
-                filepath: "/files/"+dirPath+"/"+file
+                filepath: genUrl+"/files/" + dirPath + "/" + file
             }
             resultFiles.push(fileBean);
         });
-        resData.appFiles=resultFiles;
+        resData.appFiles = resultFiles;
         res.send(resData)
     });
 });
@@ -234,7 +235,7 @@ app.get('/other', function (req, res) {
 var server = app.listen(80, function () {
     var host = server.address().address
     var port = server.address().port
-
+    genUrl = "http://" + host + ":" + port;
     console.log("应用实例，访问地址为 http://%s:%s", host, port)
 });
 

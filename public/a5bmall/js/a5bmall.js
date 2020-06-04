@@ -63,7 +63,7 @@ function back() {
 
 function showLoading() {
     var loadingImg = document.createElement("img");
-    loadingImg.src = "images/loading.gif";
+    loadingImg.src = "/a5bmall/images/loading.gif";
     loadingImg.id = "loadingImg";
     document.body.appendChild(loadingImg)
 }

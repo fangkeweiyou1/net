@@ -5,14 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <script src="jquery/jquery.js"></script>
     <script type="text/javascript" src="javascripts/index.js"></script>
     <style type="text/css">
         a {
@@ -55,8 +48,8 @@
 <body>
 
 <div class="app">
-    <img src="images/ic_wms_launcher.png" alt="" id="logo">
-    <h3 id="appname">AsiaMall</h3>
+    <img alt="" id="logo">
+    <h3 id="appname"></h3>
 </div>
 
 <img class="ic_fir_left" src="images/ic_fir_left.png" alt="">
@@ -66,104 +59,117 @@
 <script>
 
 
-    //logo
-    var logo = document.getElementById('logo');
-    //标题
-    var appname = document.getElementById('appname');
+    /*web准备完毕*/
+    $(document).ready(function () {
+        //logo
+        var logo = document.getElementById('logo');
+        //标题
+        var appname = document.getElementById('appname');
 
-    var requset = GetRequest();
+        var requset = GetRequest();
 
-    var type = requset.type
-
-    switch (type) {
-        case 'wms': {
-            logo.src = 'images/ic_wms_launcher.png'
-            appname.innerText = '武时亿WMS';
-            document.title = '武时亿WMS';
-        }
-            break;
-        case 'newasia5b_cn': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿新代购';
-            document.title = '武时亿新代购';
-        }
-            break;
-        case 'newasia5b_com': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿新代购';
-            document.title = '武时亿新代购';
-        }
-            break;
-        case 'jy_cn': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿集运';
-            document.title = '武时亿集运';
-        }
-            break;
-        case 'jy_com': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿集运';
-            document.title = '武时亿集运';
-        }
-            break;
-        case 'shop_cn': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿商城';
-            document.title = '武时亿商城';
-        }
-            break;
-        case 'shop_com': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿商城';
-            document.title = '武时亿商城';
-        }
-            break;
-        case 'pay_cn': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿支付';
-            document.title = '武时亿支付';
-        }
-            break;
-        case 'pay_com': {
-            logo.src = 'images/ic_asia_launcher.png'
-            appname.innerText = '武时亿支付';
-            document.title = '武时亿支付';
-        }
-            break;
-        case 'live_cn': {
-            logo.src = 'images/ic_live_launcher.png'
-            appname.innerText = '武时亿直播';
-            document.title = '武时亿直播';
-        }
-            break;
-        case 'live_com': {
-            logo.src = 'images/ic_live_launcher.png'
-            appname.innerText = '武时亿直播';
-            document.title = '武时亿直播';
-        }
-            break;
-        case 'other':
-            logo.src = 'images/ic_files.png'
-            appname.innerText = '文件夹';
-            document.title = '文件夹';
-            break;
-        default:
-            break;
-    }
+        var type = requset.type
 
 
-    console.log(requset);
 
-    $.get('/readDir?type=' + type, function (data, status) {
-        console.log(data)
-        var parent = $('.app').get(0);
-        data.forEach(function (file) {
-            var a = document.createElement('a');
-            a.innerText = file.filename;
-            a.href = file.filepath;
-            parent.appendChild(a)
-        });
-    })
+
+        switch (type) {
+            case 'wms': {
+                logo.src = 'images/ic_wms_launcher.png'
+                appname.innerText = '武时亿WMS';
+                document.title = '武时亿WMS';
+            }
+                break;
+            case 'newasia5b_cn': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿新代购';
+                document.title = '武时亿新代购';
+            }
+                break;
+            case 'newasia5b_com': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿新代购';
+                document.title = '武时亿新代购';
+            }
+                break;
+            case 'jy_cn': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿集运';
+                document.title = '武时亿集运';
+            }
+                break;
+            case 'jy_com': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿集运';
+                document.title = '武时亿集运';
+            }
+                break;
+            case 'shop_cn': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿商城';
+                document.title = '武时亿商城';
+            }
+                break;
+            case 'shop_com': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿商城';
+                document.title = '武时亿商城';
+            }
+                break;
+            case 'pay_cn': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿支付';
+                document.title = '武时亿支付';
+            }
+                break;
+            case 'pay_com': {
+                logo.src = 'images/ic_asia_launcher.png'
+                appname.innerText = '武时亿支付';
+                document.title = '武时亿支付';
+            }
+                break;
+            case 'live_cn': {
+                logo.src = 'images/ic_live_launcher.png'
+                appname.innerText = '武时亿直播';
+                document.title = '武时亿直播';
+            }
+                break;
+            case 'live_com': {
+                logo.src = 'images/ic_live_launcher.png'
+                appname.innerText = '武时亿直播';
+                document.title = '武时亿直播';
+            }
+                break;
+            case 'other':
+                logo.src = 'images/ic_files.png'
+                appname.innerText = '文件夹';
+                document.title = '文件夹';
+                break;
+            default:
+                break;
+        }
+
+
+        $.get('/readDir?type=' + type, function (data, status) {
+            console.log(data)
+            var parent = $('.app').get(0);
+            data.forEach(function (file) {
+                var a = document.createElement('a');
+                a.innerText = file.filename;
+                a.href = file.filepath;
+                parent.appendChild(a)
+            });
+        })
+
+    });
+
+
+
+
+
+
+
+
 
 </script>
 </html>

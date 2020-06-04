@@ -1,6 +1,4 @@
 
-var requestBaseUrl="http://192.168.1.7:8000/";
-
 function GetRequest() {
     var url = decodeURI(location.search); //获取url中"?"符后的字串
     var theRequest = new Object();

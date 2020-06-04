@@ -1,7 +1,7 @@
-var localIp="192.168.1.3";
+var localIp="127.0.0.1";
 
 function getLocalIpAll() {
-    return "http://" + localIp + ":8000/"
+    return "http://" + localIp + ":3000/"
 }
 
 /**

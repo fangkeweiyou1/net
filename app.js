@@ -48,6 +48,11 @@ app.get('/', function(req, res) {
 })
 /*todo 查看cookie end*/
 
+app.get('/meinv/*', function (req, res) {
+    console.log(req.params);
+    res.sendFile(__dirname + "/" + "/public/images/linyuner_"+req.params[0]+".jpg");
+});
+
 app.get('/download', function (req, res) {
     res.sendFile(__dirname + "/" + "/public/download.html");
 });
